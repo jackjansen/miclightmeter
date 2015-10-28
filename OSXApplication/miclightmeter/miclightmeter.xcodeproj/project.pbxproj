@@ -1,0 +1,506 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		045394F11BE174B7005B84E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 045394F01BE174B7005B84E2 /* AppDelegate.m */; };
+		045394F41BE174B7005B84E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 045394F31BE174B7005B84E2 /* main.m */; };
+		045394F61BE174B7005B84E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 045394F51BE174B7005B84E2 /* Assets.xcassets */; };
+		045394F91BE174B7005B84E2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045394F71BE174B7005B84E2 /* MainMenu.xib */; };
+		045395041BE174B8005B84E2 /* miclightmeterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 045395031BE174B8005B84E2 /* miclightmeterTests.m */; };
+		0453950F1BE174B8005B84E2 /* miclightmeterUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0453950E1BE174B8005B84E2 /* miclightmeterUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		045395001BE174B8005B84E2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 045394E41BE174B7005B84E2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 045394EB1BE174B7005B84E2;
+			remoteInfo = miclightmeter;
+		};
+		0453950B1BE174B8005B84E2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 045394E41BE174B7005B84E2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 045394EB1BE174B7005B84E2;
+			remoteInfo = miclightmeter;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		045394EC1BE174B7005B84E2 /* miclightmeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miclightmeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		045394EF1BE174B7005B84E2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		045394F01BE174B7005B84E2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		045394F31BE174B7005B84E2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		045394F51BE174B7005B84E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		045394F81BE174B7005B84E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		045394FA1BE174B7005B84E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		045394FF1BE174B8005B84E2 /* miclightmeterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = miclightmeterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		045395031BE174B8005B84E2 /* miclightmeterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = miclightmeterTests.m; sourceTree = "<group>"; };
+		045395051BE174B8005B84E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0453950A1BE174B8005B84E2 /* miclightmeterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = miclightmeterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0453950E1BE174B8005B84E2 /* miclightmeterUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = miclightmeterUITests.m; sourceTree = "<group>"; };
+		045395101BE174B8005B84E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		045394E91BE174B7005B84E2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		045394FC1BE174B8005B84E2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		045395071BE174B8005B84E2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		045394E31BE174B7005B84E2 = {
+			isa = PBXGroup;
+			children = (
+				045394EE1BE174B7005B84E2 /* miclightmeter */,
+				045395021BE174B8005B84E2 /* miclightmeterTests */,
+				0453950D1BE174B8005B84E2 /* miclightmeterUITests */,
+				045394ED1BE174B7005B84E2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		045394ED1BE174B7005B84E2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				045394EC1BE174B7005B84E2 /* miclightmeter.app */,
+				045394FF1BE174B8005B84E2 /* miclightmeterTests.xctest */,
+				0453950A1BE174B8005B84E2 /* miclightmeterUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		045394EE1BE174B7005B84E2 /* miclightmeter */ = {
+			isa = PBXGroup;
+			children = (
+				045394EF1BE174B7005B84E2 /* AppDelegate.h */,
+				045394F01BE174B7005B84E2 /* AppDelegate.m */,
+				045394F51BE174B7005B84E2 /* Assets.xcassets */,
+				045394F71BE174B7005B84E2 /* MainMenu.xib */,
+				045394FA1BE174B7005B84E2 /* Info.plist */,
+				045394F21BE174B7005B84E2 /* Supporting Files */,
+			);
+			path = miclightmeter;
+			sourceTree = "<group>";
+		};
+		045394F21BE174B7005B84E2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				045394F31BE174B7005B84E2 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		045395021BE174B8005B84E2 /* miclightmeterTests */ = {
+			isa = PBXGroup;
+			children = (
+				045395031BE174B8005B84E2 /* miclightmeterTests.m */,
+				045395051BE174B8005B84E2 /* Info.plist */,
+			);
+			path = miclightmeterTests;
+			sourceTree = "<group>";
+		};
+		0453950D1BE174B8005B84E2 /* miclightmeterUITests */ = {
+			isa = PBXGroup;
+			children = (
+				0453950E1BE174B8005B84E2 /* miclightmeterUITests.m */,
+				045395101BE174B8005B84E2 /* Info.plist */,
+			);
+			path = miclightmeterUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		045394EB1BE174B7005B84E2 /* miclightmeter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 045395131BE174B8005B84E2 /* Build configuration list for PBXNativeTarget "miclightmeter" */;
+			buildPhases = (
+				045394E81BE174B7005B84E2 /* Sources */,
+				045394E91BE174B7005B84E2 /* Frameworks */,
+				045394EA1BE174B7005B84E2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = miclightmeter;
+			productName = miclightmeter;
+			productReference = 045394EC1BE174B7005B84E2 /* miclightmeter.app */;
+			productType = "com.apple.product-type.application";
+		};
+		045394FE1BE174B8005B84E2 /* miclightmeterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 045395161BE174B8005B84E2 /* Build configuration list for PBXNativeTarget "miclightmeterTests" */;
+			buildPhases = (
+				045394FB1BE174B8005B84E2 /* Sources */,
+				045394FC1BE174B8005B84E2 /* Frameworks */,
+				045394FD1BE174B8005B84E2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				045395011BE174B8005B84E2 /* PBXTargetDependency */,
+			);
+			name = miclightmeterTests;
+			productName = miclightmeterTests;
+			productReference = 045394FF1BE174B8005B84E2 /* miclightmeterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		045395091BE174B8005B84E2 /* miclightmeterUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 045395191BE174B8005B84E2 /* Build configuration list for PBXNativeTarget "miclightmeterUITests" */;
+			buildPhases = (
+				045395061BE174B8005B84E2 /* Sources */,
+				045395071BE174B8005B84E2 /* Frameworks */,
+				045395081BE174B8005B84E2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0453950C1BE174B8005B84E2 /* PBXTargetDependency */,
+			);
+			name = miclightmeterUITests;
+			productName = miclightmeterUITests;
+			productReference = 0453950A1BE174B8005B84E2 /* miclightmeterUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		045394E41BE174B7005B84E2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = CWI;
+				TargetAttributes = {
+					045394EB1BE174B7005B84E2 = {
+						CreatedOnToolsVersion = 7.1;
+					};
+					045394FE1BE174B8005B84E2 = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = 045394EB1BE174B7005B84E2;
+					};
+					045395091BE174B8005B84E2 = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = 045394EB1BE174B7005B84E2;
+					};
+				};
+			};
+			buildConfigurationList = 045394E71BE174B7005B84E2 /* Build configuration list for PBXProject "miclightmeter" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 045394E31BE174B7005B84E2;
+			productRefGroup = 045394ED1BE174B7005B84E2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				045394EB1BE174B7005B84E2 /* miclightmeter */,
+				045394FE1BE174B8005B84E2 /* miclightmeterTests */,
+				045395091BE174B8005B84E2 /* miclightmeterUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		045394EA1BE174B7005B84E2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				045394F61BE174B7005B84E2 /* Assets.xcassets in Resources */,
+				045394F91BE174B7005B84E2 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		045394FD1BE174B8005B84E2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		045395081BE174B8005B84E2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		045394E81BE174B7005B84E2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				045394F41BE174B7005B84E2 /* main.m in Sources */,
+				045394F11BE174B7005B84E2 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		045394FB1BE174B8005B84E2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				045395041BE174B8005B84E2 /* miclightmeterTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		045395061BE174B8005B84E2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0453950F1BE174B8005B84E2 /* miclightmeterUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		045395011BE174B8005B84E2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 045394EB1BE174B7005B84E2 /* miclightmeter */;
+			targetProxy = 045395001BE174B8005B84E2 /* PBXContainerItemProxy */;
+		};
+		0453950C1BE174B8005B84E2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 045394EB1BE174B7005B84E2 /* miclightmeter */;
+			targetProxy = 0453950B1BE174B8005B84E2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		045394F71BE174B7005B84E2 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				045394F81BE174B7005B84E2 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		045395111BE174B8005B84E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		045395121BE174B8005B84E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		045395141BE174B8005B84E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = miclightmeter/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.cwi.miclightmeter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		045395151BE174B8005B84E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = miclightmeter/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.cwi.miclightmeter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		045395171BE174B8005B84E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = miclightmeterTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.cwi.miclightmeterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/miclightmeter.app/Contents/MacOS/miclightmeter";
+			};
+			name = Debug;
+		};
+		045395181BE174B8005B84E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = miclightmeterTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.cwi.miclightmeterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/miclightmeter.app/Contents/MacOS/miclightmeter";
+			};
+			name = Release;
+		};
+		0453951A1BE174B8005B84E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = miclightmeterUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.cwi.miclightmeterUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = miclightmeter;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		0453951B1BE174B8005B84E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = miclightmeterUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nl.cwi.miclightmeterUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = miclightmeter;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		045394E71BE174B7005B84E2 /* Build configuration list for PBXProject "miclightmeter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				045395111BE174B8005B84E2 /* Debug */,
+				045395121BE174B8005B84E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		045395131BE174B8005B84E2 /* Build configuration list for PBXNativeTarget "miclightmeter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				045395141BE174B8005B84E2 /* Debug */,
+				045395151BE174B8005B84E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		045395161BE174B8005B84E2 /* Build configuration list for PBXNativeTarget "miclightmeterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				045395171BE174B8005B84E2 /* Debug */,
+				045395181BE174B8005B84E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		045395191BE174B8005B84E2 /* Build configuration list for PBXNativeTarget "miclightmeterUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0453951A1BE174B8005B84E2 /* Debug */,
+				0453951B1BE174B8005B84E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 045394E41BE174B7005B84E2 /* Project object */;
+}
