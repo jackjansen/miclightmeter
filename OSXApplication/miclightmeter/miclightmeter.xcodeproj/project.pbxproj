@@ -13,6 +13,8 @@
 		045394F91BE174B7005B84E2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045394F71BE174B7005B84E2 /* MainMenu.xib */; };
 		045395041BE174B8005B84E2 /* miclightmeterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 045395031BE174B8005B84E2 /* miclightmeterTests.m */; };
 		0453950F1BE174B8005B84E2 /* miclightmeterUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0453950E1BE174B8005B84E2 /* miclightmeterUITests.m */; };
+		0453951E1BE18495005B84E2 /* MLMValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0453951D1BE18495005B84E2 /* MLMValue.m */; };
+		045395211BE185AB005B84E2 /* MLMModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 045395201BE185AB005B84E2 /* MLMModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,10 @@
 		0453950A1BE174B8005B84E2 /* miclightmeterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = miclightmeterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0453950E1BE174B8005B84E2 /* miclightmeterUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = miclightmeterUITests.m; sourceTree = "<group>"; };
 		045395101BE174B8005B84E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0453951C1BE18495005B84E2 /* MLMValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLMValue.h; sourceTree = "<group>"; };
+		0453951D1BE18495005B84E2 /* MLMValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMValue.m; sourceTree = "<group>"; };
+		0453951F1BE185AB005B84E2 /* MLMModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLMModel.h; sourceTree = "<group>"; };
+		045395201BE185AB005B84E2 /* MLMModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +108,10 @@
 				045394F71BE174B7005B84E2 /* MainMenu.xib */,
 				045394FA1BE174B7005B84E2 /* Info.plist */,
 				045394F21BE174B7005B84E2 /* Supporting Files */,
+				0453951C1BE18495005B84E2 /* MLMValue.h */,
+				0453951D1BE18495005B84E2 /* MLMValue.m */,
+				0453951F1BE185AB005B84E2 /* MLMModel.h */,
+				045395201BE185AB005B84E2 /* MLMModel.m */,
 			);
 			path = miclightmeter;
 			sourceTree = "<group>";
@@ -261,8 +271,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				045395211BE185AB005B84E2 /* MLMModel.m in Sources */,
 				045394F41BE174B7005B84E2 /* main.m in Sources */,
 				045394F11BE174B7005B84E2 /* AppDelegate.m in Sources */,
+				0453951E1BE18495005B84E2 /* MLMValue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

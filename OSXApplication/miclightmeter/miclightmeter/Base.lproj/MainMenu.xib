@@ -18,6 +18,7 @@
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+        <customObject id="m76-w1-MMv" customClass="MLMModel"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
                 <menuItem title="miclightmeter" id="1Xt-HY-uBw">
@@ -670,13 +671,199 @@
         <window title="miclightmeter" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="480" height="360"/>
+            <rect key="contentRect" x="335" y="390" width="615" height="275"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
+                <rect key="frame" x="0.0" y="0.0" width="615" height="275"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wdg-4e-3Ih">
+                        <rect key="frame" x="153" y="236" width="316" height="18"/>
+                        <animations/>
+                        <levelIndicatorCell key="cell" alignment="left" doubleValue="2" maxValue="2" warningValue="2" criticalValue="2" id="4Nl-82-tqj"/>
+                        <connections>
+                            <binding destination="m76-w1-MMv" name="maxValue" keyPath="audioLevel.maxValue" id="bqG-hZ-fl0"/>
+                            <binding destination="m76-w1-MMv" name="minValue" keyPath="audioLevel.minValue" previousBinding="bqG-hZ-fl0" id="jbR-pm-1gn"/>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="audioLevel.curValue" previousBinding="jbR-pm-1gn" id="Pbw-l1-gXU"/>
+                        </connections>
+                    </levelIndicator>
+                    <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uYb-ZU-GwV">
+                        <rect key="frame" x="153" y="182" width="316" height="18"/>
+                        <animations/>
+                        <levelIndicatorCell key="cell" alignment="left" doubleValue="2" maxValue="2" warningValue="2" criticalValue="2" id="uzh-S8-CeZ"/>
+                        <connections>
+                            <binding destination="m76-w1-MMv" name="maxValue" keyPath="lightLevel.maxValue" id="wAd-1T-v5R"/>
+                            <binding destination="m76-w1-MMv" name="minValue" keyPath="lightLevel.minValue" previousBinding="wAd-1T-v5R" id="gJZ-Lv-b12"/>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="lightLevel.maxValue" previousBinding="gJZ-Lv-b12" id="bP9-go-H5j"/>
+                        </connections>
+                    </levelIndicator>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qsc-SF-NXx">
+                        <rect key="frame" x="18" y="238" width="112" height="17"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Audio Input Level:" id="mDB-Sl-Nwq">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KgF-Y7-JZ4">
+                        <rect key="frame" x="18" y="184" width="74" height="17"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Light Level:" id="1RP-QA-9oC">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNK-Gt-boP">
+                        <rect key="frame" x="153" y="121" width="316" height="18"/>
+                        <animations/>
+                        <levelIndicatorCell key="cell" alignment="left" doubleValue="2" maxValue="2" warningValue="2" criticalValue="2" id="ghu-aE-58H"/>
+                        <connections>
+                            <binding destination="m76-w1-MMv" name="maxValue" keyPath="variationSensitivity.maxValue" id="Q90-df-hoV"/>
+                            <binding destination="m76-w1-MMv" name="minValue" keyPath="variationSensitivity.minValue" previousBinding="Q90-df-hoV" id="r6h-S0-pVj"/>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="variationSensitivity.curValue" previousBinding="r6h-S0-pVj" id="Htt-WX-3Wd"/>
+                        </connections>
+                    </levelIndicator>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AoN-P6-ZEi">
+                        <rect key="frame" x="18" y="123" width="128" height="17"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Variation Sensitivity:" id="WfW-xc-HcX">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tBZ-C4-Fea">
+                        <rect key="frame" x="471" y="174" width="130" height="32"/>
+                        <animations/>
+                        <buttonCell key="cell" type="push" title="Reset Min/Max" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IAn-oH-WqO">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="resetLightLevel:" target="m76-w1-MMv" id="5DC-UT-NPN"/>
+                        </connections>
+                    </button>
+                    <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="srS-UP-MYT">
+                        <rect key="frame" x="153" y="63" width="316" height="18"/>
+                        <animations/>
+                        <levelIndicatorCell key="cell" alignment="left" doubleValue="2" maxValue="2" warningValue="2" criticalValue="2" id="B0z-Rc-Bgm"/>
+                        <connections>
+                            <binding destination="m76-w1-MMv" name="maxValue" keyPath="variationFrequency.maxValue" id="v8p-Ez-pvI"/>
+                            <binding destination="m76-w1-MMv" name="minValue" keyPath="variationFrequency.minValue" previousBinding="v8p-Ez-pvI" id="m8H-Yl-174"/>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="variationFrequency.curValue" previousBinding="m8H-Yl-174" id="I2t-Ws-TGO"/>
+                        </connections>
+                    </levelIndicator>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vES-07-JRh">
+                        <rect key="frame" x="18" y="65" width="129" height="17"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Variation Frequency:" id="MFO-cH-yT7">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UXf-W1-gpj">
+                        <rect key="frame" x="472" y="55" width="130" height="32"/>
+                        <animations/>
+                        <buttonCell key="cell" type="push" title="Reset Min/Max" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fiq-Vh-7ub">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="resetVariationFrequency:" target="m76-w1-MMv" id="ANO-3u-ybD"/>
+                        </connections>
+                    </button>
+                    <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n8W-U3-HZB">
+                        <rect key="frame" x="477" y="116" width="120" height="24"/>
+                        <animations/>
+                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="aSo-Wy-hDr">
+                            <font key="font" metaFont="system"/>
+                            <segments>
+                                <segment label="⤇⤆"/>
+                                <segment label="↩︎" tag="1"/>
+                                <segment label="⟺" tag="2"/>
+                            </segments>
+                        </segmentedCell>
+                    </segmentedControl>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jGw-SD-UAE">
+                        <rect key="frame" x="151" y="213" width="37" height="17"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="0" id="dgG-ZV-QSo">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BxT-vd-cZD">
+                        <rect key="frame" x="434" y="210" width="37" height="17"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="100%" id="rcI-Cd-rmR">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aa6-R1-UaH">
+                        <rect key="frame" x="151" y="159" width="46" height="17"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="absmin" id="vqc-4p-G4H">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cmE-sn-ByL">
+                        <rect key="frame" x="422" y="156" width="49" height="17"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="absmax" id="tAh-pC-Kg9">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m1L-i1-pT4">
+                        <rect key="frame" x="151" y="98" width="46" height="17"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="absmin" id="U90-7A-fdP">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lvi-1J-Rsw">
+                        <rect key="frame" x="422" y="95" width="49" height="17"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="absmax" id="pHf-N7-CWw">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sZL-Hu-Mpz">
+                        <rect key="frame" x="151" y="40" width="46" height="17"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="0 Hz" id="0I5-nD-kbd">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vmp-zJ-Ial">
+                        <rect key="frame" x="422" y="37" width="49" height="17"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="1000 Hz" id="5Tn-YM-Nm9">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
                 <animations/>
             </view>
+            <point key="canvasLocation" x="378.5" y="408.5"/>
         </window>
+        <userDefaultsController representsSharedInstance="YES" id="kOh-i5-k4A"/>
     </objects>
 </document>
