@@ -1,7 +1,7 @@
-Lightphone - what it does
-=========================
+Miclightmeter - what it does
+============================
 
-The lightphone allows you to measure light levels with the microphone input of
+The miclightmeter allows you to measure light levels with the microphone input of
 your iPhone, MacBook or other device, and it allows you to control the brightness
 of an LED through the headphone output.
 
@@ -42,7 +42,7 @@ with the capacitor value lowered to give a more usable frequency range for our a
 Schematic
 =========
 
-The schematic is in lightphone-schematic.pdf. The MCP6004 is a quad opamp that
+The schematic is in miclightmeter-schematic.pdf. The MCP6004 is a quad opamp that
 has reel-to-reel inputs and outputs and operates at voltages between 1.8V and
 6V. Both the "reel-to-reel" and low-voltage aspects are important, if you decide
 to use a different opamp.
@@ -90,34 +90,34 @@ the audio plug. Therefore, S1 not only switches power on but also toggles
 the microphone input on the TRRS plug (the sleeve) between being connected
 to our circuit (when power is on) or to the TRRS socket (when power is off).
 
-So if the iPhone or mac does not recognize the lightphone and continues
+So if the iPhone or mac does not recognize the miclightmeter and continues
 getting audio from the builtin microphone the trick is to do the following:
-- turn off and unplug lightphone
+- turn off and unplug miclightmeter
 - plug Apple headset into the TRRS socket
-- plug lightphone TRRS plug into phone or computer
+- plug miclightmeter TRRS plug into phone or computer
 - (optionally use Audio Preferences or something to check the external input is used)
-- turn on the lightphone.
+- turn on the miclightmeter.
 
 To make matters worse I have also come across devices wher this does _not_
-work, but simply plugging in the lightphone while it is on does work. Go
+work, but simply plugging in the miclightmeter while it is on does work. Go
 figure.....
 
 Construction
 ============
 
 If you're not using identical components as I used look at Fritzing file
-lightphone.fzz, which has a breadboard layout. If you build this first you can
+miclightmeter.fzz, which has a breadboard layout. If you build this first you can
 experiment more easily with different resistor values and such. You may need to
 import MCP6004.fzpz.
 
-If you want to dive right in look at the stripboard layout in lightphone-stripboard.pdf
-(or the Fritzing sourcefile, lightphone-stripboard.fzz). Construction is
+If you want to dive right in look at the stripboard layout in miclightmeter-stripboard.pdf
+(or the Fritzing sourcefile, miclightmeter-stripboard.fzz). Construction is
 straightforward, with one exception: TRRS plugs are absolutely horrendous to solder.
 Eventually it turned out that by far the easiest was to buy an iPhone headset
 extension cable, cut it into two, and work with the (still tiny) wires in
 the cable.
 
-lightphone-assembly.jpg is a picture of the device before it was put into a case
+miclightmeter-assembly.jpg is a picture of the device before it was put into a case
 (and before the LED2/R14 power indicator were added).
  
 
