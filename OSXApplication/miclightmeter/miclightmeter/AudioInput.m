@@ -100,7 +100,7 @@
     }
     db /= [connection.audioChannels count];
     float level = (pow(10.f, 0.05f * db) * 20.0f);
-    [self.delegate reportAudioLevel: [NSNumber numberWithFloat: level*100]];
+    [self.delegate reportAudioLevel: level];
 
     // Get the audio data and timestamp
     

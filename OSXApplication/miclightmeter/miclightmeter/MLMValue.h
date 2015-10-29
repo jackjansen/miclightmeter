@@ -10,11 +10,11 @@
 #import <Cocoa/Cocoa.h>
 
 @interface MLMValue : NSObject
-@property NSNumber* absMinValue;
-@property NSNumber* absMaxValue;
-@property NSNumber* minValue;
-@property NSNumber* maxValue;
-@property NSNumber* curValue;
+@property float absMinValue;
+@property float absMaxValue;
+@property float minValue;
+@property float maxValue;
+@property float curValue;
 @property NSColor* belowMinColor;
 @property NSColor* midColor;
 @property NSColor* aboveMaxColor;

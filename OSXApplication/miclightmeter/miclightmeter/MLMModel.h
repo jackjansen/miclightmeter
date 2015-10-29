@@ -34,5 +34,5 @@
                   at: (uint64_t)timestamp
             duration: (uint64_t)duration;
 
-- (void)reportAudioLevel: (NSNumber*) level;
+- (void)reportAudioLevel: (float) level;
 @end
