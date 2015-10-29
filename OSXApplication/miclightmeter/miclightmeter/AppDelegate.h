@@ -7,8 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AudioInput.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
+@property IBOutlet AudioInput *capturer;
 
 
 @end

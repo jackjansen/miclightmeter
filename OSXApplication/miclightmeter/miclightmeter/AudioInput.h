@@ -1,26 +1,15 @@
 //
-//  MLMModel.h
+//  AudioInput.h
 //  miclightmeter
 //
-//  Created by Jack Jansen on 28/10/15.
+//  Created by Jack Jansen on 29/10/15.
 //  Copyright © 2015 CWI. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "MLMValue.h"
-#import "AudioInput.h"
+#import <AVFoundation/AVFoundation.h>
 
-@interface MLMModel : NSObject <AudioInputDelegate>
-@property MLMValue* audioLevel;
-@property MLMValue* lightLevel;
-@property MLMValue* variationSensitivity;
-@property MLMValue* variationFrequency;
-@property IBOutlet AudioInput* capturer;
-
-- (IBAction)resetLightLevel:(id)sender;
-- (IBAction)resetVariationFrequency:(id)sender;
-- (IBAction)changeVariationSensitivity:(id)sender;
-
+@protocol AudioInputDelegate
 /// Signals that a capture cycle has ended and provides audio data.
 /// @param buffer The audio data, as 16 bit signed integer samples
 /// @param size Size of the buffer in bytes
@@ -35,4 +24,23 @@
             duration: (uint64_t)duration;
 
 - (void)reportAudioLevel: (NSNumber*) level;
+
+@end
+
+@interface AudioInput : NSObject <AVCaptureAudioDataOutputSampleBufferDelegate> {
+    AVCaptureAudioDataOutput *outputCapturer;
+    AVCaptureSession *session;
+    dispatch_queue_t sampleBufferQueue;
+    NSString *deviceID;
+    NSString *deviceName;
+}
+
+@property (readonly) NSString *deviceID;
+@property (readonly) NSString *deviceName;
+@property IBOutlet NSObject<AudioInputDelegate>* delegate;
+
+- (void) _initDevice;
+- (void) startCapturing;
+- (void) stopCapturing;
+
 @end

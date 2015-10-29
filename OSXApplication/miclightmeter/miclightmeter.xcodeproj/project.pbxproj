@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0404B9761BE2B2290028416A /* AudioInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404B9751BE2B2290028416A /* AudioInput.m */; };
 		045394F11BE174B7005B84E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 045394F01BE174B7005B84E2 /* AppDelegate.m */; };
 		045394F41BE174B7005B84E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 045394F31BE174B7005B84E2 /* main.m */; };
 		045394F61BE174B7005B84E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 045394F51BE174B7005B84E2 /* Assets.xcassets */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0404B9741BE2B2290028416A /* AudioInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioInput.h; sourceTree = "<group>"; };
+		0404B9751BE2B2290028416A /* AudioInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioInput.m; sourceTree = "<group>"; };
 		045394EC1BE174B7005B84E2 /* miclightmeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miclightmeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045394EF1BE174B7005B84E2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		045394F01BE174B7005B84E2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -112,6 +115,8 @@
 				0453951D1BE18495005B84E2 /* MLMValue.m */,
 				0453951F1BE185AB005B84E2 /* MLMModel.h */,
 				045395201BE185AB005B84E2 /* MLMModel.m */,
+				0404B9741BE2B2290028416A /* AudioInput.h */,
+				0404B9751BE2B2290028416A /* AudioInput.m */,
 			);
 			path = miclightmeter;
 			sourceTree = "<group>";
@@ -273,6 +278,7 @@
 			files = (
 				045395211BE185AB005B84E2 /* MLMModel.m in Sources */,
 				045394F41BE174B7005B84E2 /* main.m in Sources */,
+				0404B9761BE2B2290028416A /* AudioInput.m in Sources */,
 				045394F11BE174B7005B84E2 /* AppDelegate.m in Sources */,
 				0453951E1BE18495005B84E2 /* MLMValue.m in Sources */,
 			);
@@ -495,6 +501,7 @@
 				045395151BE174B8005B84E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		045395161BE174B8005B84E2 /* Build configuration list for PBXNativeTarget "miclightmeterTests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +510,7 @@
 				045395181BE174B8005B84E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		045395191BE174B8005B84E2 /* Build configuration list for PBXNativeTarget "miclightmeterUITests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +519,7 @@
 				0453951B1BE174B8005B84E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
