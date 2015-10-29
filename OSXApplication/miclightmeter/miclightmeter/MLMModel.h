@@ -11,10 +11,10 @@
 #import "AudioInput.h"
 
 @interface MLMModel : NSObject <AudioInputDelegate>
-@property MLMValue* audioLevel;
-@property MLMValue* lightLevel;
-@property MLMValue* variationSensitivity;
-@property MLMValue* variationFrequency;
+@property IBOutlet MLMValue* audioLevel;
+@property IBOutlet MLMValue* lightLevel;
+@property IBOutlet MLMValue* variationSensitivity;
+@property IBOutlet MLMValue* variationFrequency;
 @property IBOutlet AudioInput* capturer;
 
 - (IBAction)resetLightLevel:(id)sender;

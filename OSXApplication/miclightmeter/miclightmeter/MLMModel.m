@@ -14,6 +14,16 @@
 //@property MLMValue* lightLevel;
 //@property MLMValue* variationSensitivity;
 //@property MLMValue* variationFrequency;
+- (MLMModel *)init
+{
+    if (self = [super init]) {
+        self.audioLevel = [[MLMValue alloc] init];
+        self.lightLevel = [[MLMValue alloc] init];
+        self.variationSensitivity = [[MLMValue alloc] init];
+        self.variationFrequency = [[MLMValue alloc] init];
+    }
+    return self;
+}
 
 - (void) awakeFromNib
 {
@@ -60,6 +70,7 @@
 {
     NSLog(@"Audiolevel %@", level);
     self.audioLevel.curValue = level;
+    //[self setValue:level forKey:@"audioLevel.curValue"];
 }
 
 - (IBAction)resetLightLevel:(id)sender
@@ -80,7 +91,13 @@
                   at: (uint64_t)timestamp
             duration: (uint64_t)duration
 {
-    NSLog(@"Got audio");
+    //NSLog(@"Got audio");
 }
 
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+{
+    NSLog(@"mlmmodel observeValueForKeyPath:%@ ofObject:%@ change:%@ context:%p", keyPath, object, change, context);
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    NSLog(@"now mlmmodel observeValueForKeyPath:%@ ofObject:%@ change:%@ context:%p", keyPath, object, change, context);
+}
 @end
