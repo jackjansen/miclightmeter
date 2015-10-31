@@ -7,6 +7,12 @@
 //
 
 #import "MLMModel.h"
+#import "mlmlib.h"
+
+@interface MLMModel () {
+struct mlm *mlm;
+}
+@end
 
 @implementation MLMModel
 
@@ -21,6 +27,7 @@
         self.lightLevel = [[MLMValue alloc] init];
         self.variationSensitivity = [[MLMValue alloc] init];
         self.variationFrequency = [[MLMValue alloc] init];
+        mlm = mlm_new();
     }
     return self;
 }
@@ -75,6 +82,9 @@
 
 - (IBAction)resetLightLevel:(id)sender
 {
+    mlm_reset(mlm);
+    self.lightLevel.minValue = self.lightLevel.curValue;
+    self.lightLevel.maxValue = self.lightLevel.curValue;
 }
 
 - (IBAction)resetVariationFrequency:(id)sender
@@ -91,7 +101,22 @@
                   at: (uint64_t)timestamp
             duration: (uint64_t)duration
 {
-    //NSLog(@"Got audio");
+    assert(size > 0);
+    assert(buffer);
+    assert((size&1) == 0);
+    
+    if (size == 0 || size &1 || buffer == NULL) return;
+    long rate = ((size/2)*1000000)/duration;
+    NSLog(@"rate=%ld", rate);
+    mlm_samplerate(mlm, rate);
+    mlm_feed(mlm, (short *)buffer, size/2, channels);
+    if (mlm_ready(mlm)) {
+        self.lightLevel.minValue = mlm_min(mlm);
+        if (self.lightLevel.absMinValue > self.lightLevel.minValue) self.lightLevel.absMinValue = self.lightLevel.minValue;
+        self.lightLevel.maxValue = mlm_max(mlm);
+        if (self.lightLevel.absMaxValue > self.lightLevel.maxValue) self.lightLevel.absMaxValue = self.lightLevel.maxValue;
+        self.lightLevel.curValue = mlm_average(mlm);
+    }
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context

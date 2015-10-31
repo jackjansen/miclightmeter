@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0404B9761BE2B2290028416A /* AudioInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404B9751BE2B2290028416A /* AudioInput.m */; };
+		041BB1BE1BE50C5600BB75BA /* mlmlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 041BB1BD1BE50C5600BB75BA /* mlmlib.c */; };
 		045394F11BE174B7005B84E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 045394F01BE174B7005B84E2 /* AppDelegate.m */; };
 		045394F41BE174B7005B84E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 045394F31BE174B7005B84E2 /* main.m */; };
 		045394F61BE174B7005B84E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 045394F51BE174B7005B84E2 /* Assets.xcassets */; };
@@ -38,6 +39,8 @@
 /* Begin PBXFileReference section */
 		0404B9741BE2B2290028416A /* AudioInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioInput.h; sourceTree = "<group>"; };
 		0404B9751BE2B2290028416A /* AudioInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioInput.m; sourceTree = "<group>"; };
+		041BB1BC1BE50B1400BB75BA /* mlmlib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mlmlib.h; sourceTree = "<group>"; };
+		041BB1BD1BE50C5600BB75BA /* mlmlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mlmlib.c; sourceTree = "<group>"; };
 		045394EC1BE174B7005B84E2 /* miclightmeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miclightmeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045394EF1BE174B7005B84E2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		045394F01BE174B7005B84E2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -117,6 +120,8 @@
 				045395201BE185AB005B84E2 /* MLMModel.m */,
 				0404B9741BE2B2290028416A /* AudioInput.h */,
 				0404B9751BE2B2290028416A /* AudioInput.m */,
+				041BB1BC1BE50B1400BB75BA /* mlmlib.h */,
+				041BB1BD1BE50C5600BB75BA /* mlmlib.c */,
 			);
 			path = miclightmeter;
 			sourceTree = "<group>";
@@ -276,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				041BB1BE1BE50C5600BB75BA /* mlmlib.c in Sources */,
 				045395211BE185AB005B84E2 /* MLMModel.m in Sources */,
 				045394F41BE174B7005B84E2 /* main.m in Sources */,
 				0404B9761BE2B2290028416A /* AudioInput.m in Sources */,

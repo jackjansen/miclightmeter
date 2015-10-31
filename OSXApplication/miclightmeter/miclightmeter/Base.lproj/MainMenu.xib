@@ -891,10 +891,10 @@
                         <animations/>
                         <levelIndicatorCell key="cell" alignment="left" doubleValue="50" maxValue="100" criticalValue="100" numberOfMajorTickMarks="10" id="4Nl-82-tqj"/>
                         <connections>
-                            <binding destination="m76-w1-MMv" name="criticalValue" keyPath="audioLevel.maxValue" id="So3-a0-y2Q"/>
                             <binding destination="m76-w1-MMv" name="maxValue" keyPath="audioLevel.absMaxValue" id="8Fc-QN-G0z"/>
                             <binding destination="m76-w1-MMv" name="minValue" keyPath="audioLevel.absMinValue" previousBinding="8Fc-QN-G0z" id="JK7-d6-FMo"/>
                             <binding destination="m76-w1-MMv" name="value" keyPath="audioLevel.curValue" previousBinding="JK7-d6-FMo" id="g2h-tC-CLQ"/>
+                            <binding destination="m76-w1-MMv" name="criticalValue" keyPath="audioLevel.maxValue" id="So3-a0-y2Q"/>
                             <binding destination="m76-w1-MMv" name="warningValue" keyPath="audioLevel.minValue" previousBinding="So3-a0-y2Q" id="0lD-2I-R5S"/>
                         </connections>
                     </levelIndicator>
