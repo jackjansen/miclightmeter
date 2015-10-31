@@ -116,6 +116,7 @@ struct mlm *mlm;
         self.lightLevel.maxValue = mlm_max(mlm);
         if (self.lightLevel.absMaxValue > self.lightLevel.maxValue) self.lightLevel.absMaxValue = self.lightLevel.maxValue;
         self.lightLevel.curValue = mlm_average(mlm);
+        NSLog(@"min %f max %f avg %f", mlm_min(mlm), mlm_max(mlm), mlm_average(mlm));
     }
 }
 
