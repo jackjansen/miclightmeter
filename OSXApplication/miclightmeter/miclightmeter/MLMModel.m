@@ -82,10 +82,30 @@ struct mlm *mlm;
 
 - (IBAction)resetVariationFrequency:(id)sender
 {
+    NSLog(@"resetVariationFrequency");
 }
 
 - (IBAction)changeVariationSensitivity:(id)sender
 {
+    NSSegmentedControl *ctl = (NSSegmentedControl *)sender;
+    int idx = ctl.selectedSegment;
+    NSLog(@"changeVariationSensitivity %d", idx);
+    if (idx == 0) {
+        if (self.variationSensitivity.minValue > self.variationSensitivity.absMinValue) {
+            self.variationSensitivity.minValue--;
+        }
+        if (self.variationSensitivity.maxValue > self.variationSensitivity.absMaxValue) {
+            self.variationSensitivity.maxValue++;
+        }
+    } else if (idx == 1) {
+        self.variationSensitivity.minValue = self.lightLevel.minValue;
+        self.variationSensitivity.maxValue = self.lightLevel.maxValue;
+    } else if (idx == 2) {
+        if (self.variationSensitivity.minValue < self.variationSensitivity.maxValue) {
+            self.variationSensitivity.minValue++;
+            self.variationSensitivity.maxValue--;
+        }
+    }
 }
 
 - (void)newInputDone: (void*)buffer
@@ -118,6 +138,8 @@ struct mlm *mlm;
         if (self.lightLevel.absMaxValue < max) self.lightLevel.absMaxValue = max;
         self.lightLevel.curValue = cur;
         NSLog(@"min %f max %f avg %f cur %f", min, max, avg, cur);
+        self.variationSensitivity.absMinValue = self.lightLevel.absMinValue;
+        self.variationSensitivity.absMaxValue = self.lightLevel.absMaxValue;
     }
 }
 

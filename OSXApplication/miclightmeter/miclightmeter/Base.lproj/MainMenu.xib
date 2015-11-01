@@ -793,7 +793,7 @@
                     <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n8W-U3-HZB">
                         <rect key="frame" x="477" y="99" width="120" height="24"/>
                         <animations/>
-                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="aSo-Wy-hDr">
+                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="aSo-Wy-hDr">
                             <font key="font" metaFont="system"/>
                             <segments>
                                 <segment label="⤇⤆"/>
@@ -801,6 +801,9 @@
                                 <segment label="⟺" tag="2"/>
                             </segments>
                         </segmentedCell>
+                        <connections>
+                            <action selector="changeVariationSensitivity:" target="m76-w1-MMv" id="gb5-71-jNI"/>
+                        </connections>
                     </segmentedControl>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jGw-SD-UAE">
                         <rect key="frame" x="151" y="196" width="37" height="17"/>
