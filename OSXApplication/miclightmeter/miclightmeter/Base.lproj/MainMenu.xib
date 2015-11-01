@@ -918,8 +918,9 @@
                             <binding destination="m76-w1-MMv" name="criticalValue" keyPath="lightLevel.maxValue" id="C3g-6C-XlK"/>
                             <binding destination="m76-w1-MMv" name="maxValue" keyPath="lightLevel.absMaxValue" id="nbm-7S-FvA"/>
                             <binding destination="m76-w1-MMv" name="minValue" keyPath="lightLevel.absMinValue" previousBinding="nbm-7S-FvA" id="ucw-62-7uJ"/>
-                            <binding destination="m76-w1-MMv" name="value" keyPath="lightLevel.maxValue" previousBinding="ucw-62-7uJ" id="i5F-DL-lpr"/>
-                            <binding destination="m76-w1-MMv" name="warningValue" keyPath="lightLevel.minValue" previousBinding="C3g-6C-XlK" id="yMm-XP-76J"/>
+                            <binding destination="m76-w1-MMv" name="toolTip" keyPath="lightLevel.curValue" previousBinding="C3g-6C-XlK" id="FYU-wy-kbq"/>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="lightLevel.curValue" previousBinding="ucw-62-7uJ" id="WAY-2m-OAC"/>
+                            <binding destination="m76-w1-MMv" name="warningValue" keyPath="lightLevel.minValue" previousBinding="FYU-wy-kbq" id="Wwq-R8-hb4"/>
                         </connections>
                     </levelIndicator>
                 </subviews>

@@ -44,8 +44,8 @@ struct mlm *mlm;
     self.audioLevel.midColor = [NSColor greenColor];
     self.audioLevel.aboveMaxColor = [NSColor yellowColor];
     
-    self.lightLevel.absMinValue = 0.0;
-    self.lightLevel.absMaxValue = 100.0;
+    self.lightLevel.absMinValue = 50.0;
+    self.lightLevel.absMaxValue = 10000.0;
     self.lightLevel.minValue = 40.0;
     self.lightLevel.maxValue = 80.0;
     self.lightLevel.curValue = 50;
@@ -99,9 +99,9 @@ struct mlm *mlm;
     assert((size&1) == 0);
     
     if (size == 0 || size &1 || buffer == NULL) return;
-    long rate = ((size/2)*1000000)/duration;
+    long rate = ((size/4)*1000000)/duration;
     NSLog(@"rate=%ld", rate);
-    mlm_samplerate(mlm, rate);
+    mlm_samplerate(mlm, 44100);
     mlm_threshold(mlm, 32768 / 10);
     mlm_feed(mlm, (short *)buffer, size/2, channels);
     float ppLevel = mlm_amplitude(mlm, (short *)buffer, size/2, channels) / 32768.0;
@@ -110,9 +110,9 @@ struct mlm *mlm;
         self.lightLevel.minValue = mlm_min(mlm);
         if (self.lightLevel.absMinValue > self.lightLevel.minValue) self.lightLevel.absMinValue = self.lightLevel.minValue;
         self.lightLevel.maxValue = mlm_max(mlm);
-        if (self.lightLevel.absMaxValue > self.lightLevel.maxValue) self.lightLevel.absMaxValue = self.lightLevel.maxValue;
-        self.lightLevel.curValue = mlm_average(mlm);
-        NSLog(@"min %f max %f avg %f", mlm_min(mlm), mlm_max(mlm), mlm_average(mlm));
+        if (self.lightLevel.absMaxValue < self.lightLevel.maxValue) self.lightLevel.absMaxValue = self.lightLevel.maxValue;
+        self.lightLevel.curValue = mlm_current(mlm);
+        NSLog(@"min %f max %f avg %f cur %f", mlm_min(mlm), mlm_max(mlm), mlm_average(mlm), mlm_current(mlm));
     }
 }
 
