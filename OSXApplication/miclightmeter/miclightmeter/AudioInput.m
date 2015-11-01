@@ -63,11 +63,11 @@
         NSDictionary *settings = [NSDictionary dictionaryWithObjectsAndKeys:
                                   [NSNumber numberWithUnsignedInt:kAudioFormatLinearPCM], AVFormatIDKey,
                                   [NSNumber numberWithFloat:44100], AVSampleRateKey,
-                                  //		[NSNumber numberWithUnsignedInteger:1], AVNumberOfChannelsKey,
+                                  [NSNumber numberWithUnsignedInteger:1], AVNumberOfChannelsKey,
                                   [NSNumber numberWithInt:16], AVLinearPCMBitDepthKey,
                                   [NSNumber numberWithBool:NO], AVLinearPCMIsFloatKey,
                                   [NSNumber numberWithBool:NO], AVLinearPCMIsNonInterleaved,
-                                  //		[NSNumber numberWithBool:NO], AVLinearPCMIsBigEndianKey,
+                                  [NSNumber numberWithBool:NO], AVLinearPCMIsBigEndianKey,
                                   nil];
         [outputCapturer setAudioSettings: settings];
     }

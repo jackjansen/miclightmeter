@@ -97,22 +97,27 @@ struct mlm *mlm;
     assert(size > 0);
     assert(buffer);
     assert((size&1) == 0);
+    short *sbuffer = (short *)buffer;
     
     if (size == 0 || size &1 || buffer == NULL) return;
-    long rate = ((size/4)*1000000)/duration;
+    long rate = (((size+2*channels-1)/(2*channels))*1000000)/duration;
     NSLog(@"rate=%ld", rate);
-    mlm_samplerate(mlm, 44100);
-    mlm_threshold(mlm, 32768 / 10);
-    mlm_feed(mlm, (short *)buffer, size/2, channels);
-    float ppLevel = mlm_amplitude(mlm, (short *)buffer, size/2, channels) / 32768.0;
+    mlm_samplerate(mlm, rate);
+    mlm_threshold(mlm, 1);
+    mlm_feed(mlm, sbuffer, size/2, channels);
+    float ppLevel = mlm_amplitude(mlm, sbuffer, size/2, channels) / 32768.0;
     self.audioLevel.curValue = ppLevel;
     if (mlm_ready(mlm)) {
-        self.lightLevel.minValue = mlm_min(mlm);
-        if (self.lightLevel.absMinValue > self.lightLevel.minValue) self.lightLevel.absMinValue = self.lightLevel.minValue;
-        self.lightLevel.maxValue = mlm_max(mlm);
-        if (self.lightLevel.absMaxValue < self.lightLevel.maxValue) self.lightLevel.absMaxValue = self.lightLevel.maxValue;
-        self.lightLevel.curValue = mlm_current(mlm);
-        NSLog(@"min %f max %f avg %f cur %f", mlm_min(mlm), mlm_max(mlm), mlm_average(mlm), mlm_current(mlm));
+        float min = mlm_min(mlm);
+        float max = mlm_max(mlm);
+        float cur = mlm_current(mlm);
+        float avg = mlm_average(mlm);
+        self.lightLevel.minValue = min;
+        if (self.lightLevel.absMinValue > min) self.lightLevel.absMinValue = min;
+        self.lightLevel.maxValue = max;
+        if (self.lightLevel.absMaxValue < max) self.lightLevel.absMaxValue = max;
+        self.lightLevel.curValue = cur;
+        NSLog(@"min %f max %f avg %f cur %f", min, max, avg, cur);
     }
 }
 
