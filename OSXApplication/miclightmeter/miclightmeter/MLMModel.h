@@ -33,6 +33,4 @@
             channels: (int)channels
                   at: (uint64_t)timestamp
             duration: (uint64_t)duration;
-
-- (void)reportAudioLevel: (float) level;
 @end

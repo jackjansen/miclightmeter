@@ -687,20 +687,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="609" height="283"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uYb-ZU-GwV">
-                        <rect key="frame" x="153" y="165" width="316" height="18"/>
-                        <animations/>
-                        <levelIndicatorCell key="cell" alignment="left" doubleValue="2" maxValue="2" warningValue="2" criticalValue="2" id="uzh-S8-CeZ"/>
-                        <connections>
-                            <binding destination="m76-w1-MMv" name="value" keyPath="lightLevel.maxValue" previousBinding="gJZ-Lv-b12" id="bP9-go-H5j"/>
-                            <binding destination="m76-w1-MMv" name="maxValue" keyPath="lightLevel.maxValue" id="wAd-1T-v5R"/>
-                            <binding destination="m76-w1-MMv" name="minValue" keyPath="lightLevel.minValue" previousBinding="wAd-1T-v5R" id="gJZ-Lv-b12"/>
-                        </connections>
-                    </levelIndicator>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qsc-SF-NXx">
-                        <rect key="frame" x="18" y="221" width="112" height="17"/>
+                        <rect key="frame" x="18" y="221" width="111" height="17"/>
                         <animations/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Audio Input Level:" id="mDB-Sl-Nwq">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Audio Level (P/P):" id="mDB-Sl-Nwq">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -737,13 +727,15 @@
                         </textFieldCell>
                     </textField>
                     <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNK-Gt-boP">
-                        <rect key="frame" x="153" y="104" width="316" height="18"/>
+                        <rect key="frame" x="153" y="105" width="316" height="16"/>
                         <animations/>
-                        <levelIndicatorCell key="cell" alignment="left" doubleValue="2" maxValue="2" warningValue="2" criticalValue="2" id="ghu-aE-58H"/>
+                        <levelIndicatorCell key="cell" alignment="left" doubleValue="2" maxValue="2" warningValue="2" criticalValue="2" levelIndicatorStyle="continuousCapacity" id="ghu-aE-58H"/>
                         <connections>
-                            <binding destination="m76-w1-MMv" name="value" keyPath="variationSensitivity.curValue" previousBinding="r6h-S0-pVj" id="Htt-WX-3Wd"/>
-                            <binding destination="m76-w1-MMv" name="maxValue" keyPath="variationSensitivity.maxValue" id="Q90-df-hoV"/>
-                            <binding destination="m76-w1-MMv" name="minValue" keyPath="variationSensitivity.minValue" previousBinding="Q90-df-hoV" id="r6h-S0-pVj"/>
+                            <binding destination="m76-w1-MMv" name="criticalValue" keyPath="variationSensitivity.maxValue" id="VMM-Te-BzL"/>
+                            <binding destination="m76-w1-MMv" name="maxValue" keyPath="variationSensitivity.absMaxValue" id="RVX-f0-JbK"/>
+                            <binding destination="m76-w1-MMv" name="minValue" keyPath="variationSensitivity.absMinValue" previousBinding="RVX-f0-JbK" id="EVf-Xb-x0p"/>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="variationSensitivity.curValue" previousBinding="EVf-Xb-x0p" id="E4i-AX-vIh"/>
+                            <binding destination="m76-w1-MMv" name="warningValue" keyPath="variationSensitivity.minValue" previousBinding="VMM-Te-BzL" id="kuJ-N4-kfF"/>
                         </connections>
                     </levelIndicator>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AoN-P6-ZEi">
@@ -767,13 +759,15 @@
                         </connections>
                     </button>
                     <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="srS-UP-MYT">
-                        <rect key="frame" x="153" y="46" width="316" height="18"/>
+                        <rect key="frame" x="153" y="47" width="316" height="16"/>
                         <animations/>
-                        <levelIndicatorCell key="cell" alignment="left" doubleValue="2" maxValue="2" warningValue="2" criticalValue="2" id="B0z-Rc-Bgm"/>
+                        <levelIndicatorCell key="cell" alignment="left" doubleValue="2" maxValue="2" warningValue="2" criticalValue="2" levelIndicatorStyle="continuousCapacity" id="B0z-Rc-Bgm"/>
                         <connections>
-                            <binding destination="m76-w1-MMv" name="value" keyPath="variationFrequency.curValue" previousBinding="m8H-Yl-174" id="I2t-Ws-TGO"/>
-                            <binding destination="m76-w1-MMv" name="maxValue" keyPath="variationFrequency.maxValue" id="v8p-Ez-pvI"/>
-                            <binding destination="m76-w1-MMv" name="minValue" keyPath="variationFrequency.minValue" previousBinding="v8p-Ez-pvI" id="m8H-Yl-174"/>
+                            <binding destination="m76-w1-MMv" name="criticalValue" keyPath="variationFrequency.maxValue" id="kcs-BO-6DA"/>
+                            <binding destination="m76-w1-MMv" name="maxValue" keyPath="variationFrequency.absMaxValue" id="glz-TM-j5S"/>
+                            <binding destination="m76-w1-MMv" name="minValue" keyPath="variationFrequency.absMinValue" previousBinding="glz-TM-j5S" id="Hpb-5O-Iwm"/>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="variationFrequency.curValue" previousBinding="Hpb-5O-Iwm" id="2xG-Vc-UKN"/>
+                            <binding destination="m76-w1-MMv" name="warningValue" keyPath="variationFrequency.minValue" previousBinding="kcs-BO-6DA" id="i9S-Iw-yBU"/>
                         </connections>
                     </levelIndicator>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vES-07-JRh">
@@ -840,6 +834,9 @@
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="lightLevel.absMinValue" id="2Rs-b5-i07"/>
+                        </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cmE-sn-ByL">
                         <rect key="frame" x="422" y="139" width="49" height="17"/>
@@ -849,6 +846,9 @@
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="lightLevel.absMaxValue" id="AvX-je-Jqe"/>
+                        </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m1L-i1-pT4">
                         <rect key="frame" x="151" y="81" width="46" height="17"/>
@@ -858,6 +858,9 @@
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="variationSensitivity.absMinValue" id="seU-92-sQi"/>
+                        </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lvi-1J-Rsw">
                         <rect key="frame" x="422" y="78" width="49" height="17"/>
@@ -867,6 +870,9 @@
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="variationSensitivity.absMaxValue" id="xTy-gq-aSd"/>
+                        </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sZL-Hu-Mpz">
                         <rect key="frame" x="151" y="23" width="46" height="17"/>
@@ -876,6 +882,9 @@
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="variationFrequency.absMinValue" id="I3U-AJ-NZH"/>
+                        </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vmp-zJ-Ial">
                         <rect key="frame" x="422" y="20" width="49" height="17"/>
@@ -885,17 +894,32 @@
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="variationFrequency.absMaxValue" id="lFE-zm-ajP"/>
+                        </connections>
                     </textField>
                     <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wdg-4e-3Ih">
-                        <rect key="frame" x="153" y="219" width="316" height="18"/>
+                        <rect key="frame" x="153" y="220" width="316" height="16"/>
                         <animations/>
-                        <levelIndicatorCell key="cell" alignment="left" doubleValue="50" maxValue="100" criticalValue="100" numberOfMajorTickMarks="10" id="4Nl-82-tqj"/>
+                        <levelIndicatorCell key="cell" alignment="left" maxValue="1" numberOfMajorTickMarks="10" levelIndicatorStyle="continuousCapacity" id="4Nl-82-tqj"/>
                         <connections>
                             <binding destination="m76-w1-MMv" name="maxValue" keyPath="audioLevel.absMaxValue" id="8Fc-QN-G0z"/>
                             <binding destination="m76-w1-MMv" name="minValue" keyPath="audioLevel.absMinValue" previousBinding="8Fc-QN-G0z" id="JK7-d6-FMo"/>
                             <binding destination="m76-w1-MMv" name="value" keyPath="audioLevel.curValue" previousBinding="JK7-d6-FMo" id="g2h-tC-CLQ"/>
                             <binding destination="m76-w1-MMv" name="criticalValue" keyPath="audioLevel.maxValue" id="So3-a0-y2Q"/>
                             <binding destination="m76-w1-MMv" name="warningValue" keyPath="audioLevel.minValue" previousBinding="So3-a0-y2Q" id="0lD-2I-R5S"/>
+                        </connections>
+                    </levelIndicator>
+                    <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uYb-ZU-GwV">
+                        <rect key="frame" x="153" y="166" width="316" height="16"/>
+                        <animations/>
+                        <levelIndicatorCell key="cell" alignment="left" doubleValue="2" maxValue="2" warningValue="2" criticalValue="2" levelIndicatorStyle="continuousCapacity" id="uzh-S8-CeZ"/>
+                        <connections>
+                            <binding destination="m76-w1-MMv" name="criticalValue" keyPath="lightLevel.maxValue" id="C3g-6C-XlK"/>
+                            <binding destination="m76-w1-MMv" name="maxValue" keyPath="lightLevel.absMaxValue" id="nbm-7S-FvA"/>
+                            <binding destination="m76-w1-MMv" name="minValue" keyPath="lightLevel.absMinValue" previousBinding="nbm-7S-FvA" id="ucw-62-7uJ"/>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="lightLevel.maxValue" previousBinding="ucw-62-7uJ" id="i5F-DL-lpr"/>
+                            <binding destination="m76-w1-MMv" name="warningValue" keyPath="lightLevel.minValue" previousBinding="C3g-6C-XlK" id="yMm-XP-76J"/>
                         </connections>
                     </levelIndicator>
                 </subviews>

@@ -36,10 +36,10 @@ struct mlm *mlm;
 {
     NSLog(@"MLMModel awakeFromNib");
     self.audioLevel.absMinValue = 0.0;
-    self.audioLevel.absMaxValue = 100.0;
-    self.audioLevel.minValue = 40.0;
-    self.audioLevel.maxValue = 80.0;
-    self.audioLevel.curValue = 50;
+    self.audioLevel.absMaxValue = 1.0;
+    self.audioLevel.minValue = 0.2;
+    self.audioLevel.maxValue = 0.9;
+    self.audioLevel.curValue = 0;
     self.audioLevel.belowMinColor = [NSColor yellowColor];
     self.audioLevel.midColor = [NSColor greenColor];
     self.audioLevel.aboveMaxColor = [NSColor yellowColor];
@@ -73,13 +73,6 @@ struct mlm *mlm;
     
 }
 
-- (void)reportAudioLevel: (float)level
-{
-    NSLog(@"Audiolevel %f", level);
-    self.audioLevel.curValue = level;
-    //[self setValue:level forKey:@"audioLevel.curValue"];
-}
-
 - (IBAction)resetLightLevel:(id)sender
 {
     mlm_reset(mlm);
@@ -109,7 +102,10 @@ struct mlm *mlm;
     long rate = ((size/2)*1000000)/duration;
     NSLog(@"rate=%ld", rate);
     mlm_samplerate(mlm, rate);
+    mlm_threshold(mlm, 32768 / 10);
     mlm_feed(mlm, (short *)buffer, size/2, channels);
+    float ppLevel = mlm_amplitude(mlm, (short *)buffer, size/2, channels) / 32768.0;
+    self.audioLevel.curValue = ppLevel;
     if (mlm_ready(mlm)) {
         self.lightLevel.minValue = mlm_min(mlm);
         if (self.lightLevel.absMinValue > self.lightLevel.minValue) self.lightLevel.absMinValue = self.lightLevel.minValue;

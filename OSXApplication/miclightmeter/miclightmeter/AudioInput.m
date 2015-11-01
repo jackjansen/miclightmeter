@@ -92,15 +92,6 @@
 {
     if (self.delegate == nil) return;
     // Determine input level for VU-meter
-    float db = 0;
-    AVCaptureConnection *conn = [outputCapturer.connections objectAtIndex: 0];
-    AVCaptureAudioChannel *ch;
-    for (ch in conn.audioChannels) {
-        db += ch.averagePowerLevel;
-    }
-    db /= [connection.audioChannels count];
-    float level = (pow(10.f, 0.05f * db) * 20.0f);
-    [self.delegate reportAudioLevel: level];
 
     // Get the audio data and timestamp
     
