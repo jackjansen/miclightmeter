@@ -726,15 +726,20 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNK-Gt-boP">
+                    <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNK-Gt-boP" customClass="MLMRangeLevelIndicator">
                         <rect key="frame" x="153" y="105" width="316" height="16"/>
                         <animations/>
                         <levelIndicatorCell key="cell" alignment="left" doubleValue="2" maxValue="2" warningValue="2" criticalValue="2" levelIndicatorStyle="continuousCapacity" id="ghu-aE-58H"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="midColor">
+                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                         <connections>
-                            <binding destination="m76-w1-MMv" name="criticalValue" keyPath="variationSensitivity.maxValue" id="VMM-Te-BzL"/>
                             <binding destination="m76-w1-MMv" name="maxValue" keyPath="variationSensitivity.absMaxValue" id="RVX-f0-JbK"/>
                             <binding destination="m76-w1-MMv" name="minValue" keyPath="variationSensitivity.absMinValue" previousBinding="RVX-f0-JbK" id="EVf-Xb-x0p"/>
                             <binding destination="m76-w1-MMv" name="value" keyPath="variationSensitivity.curValue" previousBinding="EVf-Xb-x0p" id="E4i-AX-vIh"/>
+                            <binding destination="m76-w1-MMv" name="criticalValue" keyPath="variationSensitivity.maxValue" id="VMM-Te-BzL"/>
                             <binding destination="m76-w1-MMv" name="warningValue" keyPath="variationSensitivity.minValue" previousBinding="VMM-Te-BzL" id="kuJ-N4-kfF"/>
                         </connections>
                     </levelIndicator>
@@ -758,15 +763,20 @@
                             <action selector="resetLightLevel:" target="m76-w1-MMv" id="5DC-UT-NPN"/>
                         </connections>
                     </button>
-                    <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="srS-UP-MYT">
+                    <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="srS-UP-MYT" customClass="MLMRangeLevelIndicator">
                         <rect key="frame" x="153" y="47" width="316" height="16"/>
                         <animations/>
                         <levelIndicatorCell key="cell" alignment="left" doubleValue="2" maxValue="2" warningValue="2" criticalValue="2" levelIndicatorStyle="continuousCapacity" id="B0z-Rc-Bgm"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="midColor">
+                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                         <connections>
-                            <binding destination="m76-w1-MMv" name="criticalValue" keyPath="variationFrequency.maxValue" id="kcs-BO-6DA"/>
                             <binding destination="m76-w1-MMv" name="maxValue" keyPath="variationFrequency.absMaxValue" id="glz-TM-j5S"/>
                             <binding destination="m76-w1-MMv" name="minValue" keyPath="variationFrequency.absMinValue" previousBinding="glz-TM-j5S" id="Hpb-5O-Iwm"/>
                             <binding destination="m76-w1-MMv" name="value" keyPath="variationFrequency.curValue" previousBinding="Hpb-5O-Iwm" id="2xG-Vc-UKN"/>
+                            <binding destination="m76-w1-MMv" name="criticalValue" keyPath="variationFrequency.maxValue" id="kcs-BO-6DA"/>
                             <binding destination="m76-w1-MMv" name="warningValue" keyPath="variationFrequency.minValue" previousBinding="kcs-BO-6DA" id="i9S-Iw-yBU"/>
                         </connections>
                     </levelIndicator>
@@ -901,10 +911,21 @@
                             <binding destination="m76-w1-MMv" name="value" keyPath="variationFrequency.absMaxValue" id="lFE-zm-ajP"/>
                         </connections>
                     </textField>
-                    <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wdg-4e-3Ih">
-                        <rect key="frame" x="153" y="220" width="316" height="16"/>
+                    <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wdg-4e-3Ih" customClass="MLM3ColorLevelIndicator">
+                        <rect key="frame" x="153" y="221" width="316" height="16"/>
                         <animations/>
-                        <levelIndicatorCell key="cell" alignment="left" maxValue="1" numberOfMajorTickMarks="10" levelIndicatorStyle="continuousCapacity" id="4Nl-82-tqj"/>
+                        <levelIndicatorCell key="cell" alignment="left" maxValue="1" numberOfMajorTickMarks="10" levelIndicatorStyle="continuousCapacity" id="4Nl-82-tqj" customClass="MLM3ColorLevelIndicatorCell"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="leftColor">
+                                <color key="value" red="1" green="0.67592861130379045" blue="0.32231336697780122" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="rightColor">
+                                <color key="value" red="1" green="0.67592861130000004" blue="0.32231336700000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="midColor">
+                                <color key="value" red="0.1100640371" green="0.6032608747" blue="0.090236157179999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                         <connections>
                             <binding destination="m76-w1-MMv" name="maxValue" keyPath="audioLevel.absMaxValue" id="8Fc-QN-G0z"/>
                             <binding destination="m76-w1-MMv" name="minValue" keyPath="audioLevel.absMinValue" previousBinding="8Fc-QN-G0z" id="JK7-d6-FMo"/>
@@ -913,16 +934,21 @@
                             <binding destination="m76-w1-MMv" name="warningValue" keyPath="audioLevel.minValue" previousBinding="So3-a0-y2Q" id="0lD-2I-R5S"/>
                         </connections>
                     </levelIndicator>
-                    <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uYb-ZU-GwV">
+                    <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uYb-ZU-GwV" customClass="MLM3ColorLevelIndicator">
                         <rect key="frame" x="153" y="166" width="316" height="16"/>
                         <animations/>
                         <levelIndicatorCell key="cell" alignment="left" doubleValue="2" maxValue="2" warningValue="2" criticalValue="2" levelIndicatorStyle="continuousCapacity" id="uzh-S8-CeZ"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="midColor">
+                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                         <connections>
-                            <binding destination="m76-w1-MMv" name="criticalValue" keyPath="lightLevel.maxValue" id="C3g-6C-XlK"/>
                             <binding destination="m76-w1-MMv" name="maxValue" keyPath="lightLevel.absMaxValue" id="nbm-7S-FvA"/>
                             <binding destination="m76-w1-MMv" name="minValue" keyPath="lightLevel.absMinValue" previousBinding="nbm-7S-FvA" id="ucw-62-7uJ"/>
                             <binding destination="m76-w1-MMv" name="toolTip" keyPath="lightLevel.curValue" previousBinding="C3g-6C-XlK" id="FYU-wy-kbq"/>
                             <binding destination="m76-w1-MMv" name="value" keyPath="lightLevel.curValue" previousBinding="ucw-62-7uJ" id="WAY-2m-OAC"/>
+                            <binding destination="m76-w1-MMv" name="criticalValue" keyPath="lightLevel.maxValue" id="C3g-6C-XlK"/>
                             <binding destination="m76-w1-MMv" name="warningValue" keyPath="lightLevel.minValue" previousBinding="FYU-wy-kbq" id="Wwq-R8-hb4"/>
                         </connections>
                     </levelIndicator>

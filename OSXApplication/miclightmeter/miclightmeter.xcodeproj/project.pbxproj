@@ -17,6 +17,10 @@
 		0453950F1BE174B8005B84E2 /* miclightmeterUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0453950E1BE174B8005B84E2 /* miclightmeterUITests.m */; };
 		0453951E1BE18495005B84E2 /* MLMValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0453951D1BE18495005B84E2 /* MLMValue.m */; };
 		045395211BE185AB005B84E2 /* MLMModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 045395201BE185AB005B84E2 /* MLMModel.m */; };
+		04FEC12A1BE8054400C12D0D /* MLM3ColorLevelIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC1291BE8054400C12D0D /* MLM3ColorLevelIndicator.m */; };
+		04FEC12D1BE8058700C12D0D /* MLM3ColorLevelIndicatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC12C1BE8058700C12D0D /* MLM3ColorLevelIndicatorCell.m */; };
+		04FEC1301BE81A0600C12D0D /* MLMRangeLevelIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC12F1BE81A0600C12D0D /* MLMRangeLevelIndicator.m */; };
+		04FEC1331BE81A2400C12D0D /* MLMRangeLevelIndicatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC1321BE81A2400C12D0D /* MLMRangeLevelIndicatorCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +62,14 @@
 		0453951D1BE18495005B84E2 /* MLMValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMValue.m; sourceTree = "<group>"; };
 		0453951F1BE185AB005B84E2 /* MLMModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLMModel.h; sourceTree = "<group>"; };
 		045395201BE185AB005B84E2 /* MLMModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMModel.m; sourceTree = "<group>"; };
+		04FEC1281BE8054400C12D0D /* MLM3ColorLevelIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLM3ColorLevelIndicator.h; sourceTree = "<group>"; };
+		04FEC1291BE8054400C12D0D /* MLM3ColorLevelIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLM3ColorLevelIndicator.m; sourceTree = "<group>"; };
+		04FEC12B1BE8058700C12D0D /* MLM3ColorLevelIndicatorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLM3ColorLevelIndicatorCell.h; sourceTree = "<group>"; };
+		04FEC12C1BE8058700C12D0D /* MLM3ColorLevelIndicatorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLM3ColorLevelIndicatorCell.m; sourceTree = "<group>"; };
+		04FEC12E1BE81A0600C12D0D /* MLMRangeLevelIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLMRangeLevelIndicator.h; sourceTree = "<group>"; };
+		04FEC12F1BE81A0600C12D0D /* MLMRangeLevelIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMRangeLevelIndicator.m; sourceTree = "<group>"; };
+		04FEC1311BE81A2400C12D0D /* MLMRangeLevelIndicatorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLMRangeLevelIndicatorCell.h; sourceTree = "<group>"; };
+		04FEC1321BE81A2400C12D0D /* MLMRangeLevelIndicatorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMRangeLevelIndicatorCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +134,14 @@
 				0404B9751BE2B2290028416A /* AudioInput.m */,
 				041BB1BC1BE50B1400BB75BA /* mlmlib.h */,
 				041BB1BD1BE50C5600BB75BA /* mlmlib.c */,
+				04FEC1281BE8054400C12D0D /* MLM3ColorLevelIndicator.h */,
+				04FEC1291BE8054400C12D0D /* MLM3ColorLevelIndicator.m */,
+				04FEC12B1BE8058700C12D0D /* MLM3ColorLevelIndicatorCell.h */,
+				04FEC12C1BE8058700C12D0D /* MLM3ColorLevelIndicatorCell.m */,
+				04FEC12E1BE81A0600C12D0D /* MLMRangeLevelIndicator.h */,
+				04FEC12F1BE81A0600C12D0D /* MLMRangeLevelIndicator.m */,
+				04FEC1311BE81A2400C12D0D /* MLMRangeLevelIndicatorCell.h */,
+				04FEC1321BE81A2400C12D0D /* MLMRangeLevelIndicatorCell.m */,
 			);
 			path = miclightmeter;
 			sourceTree = "<group>";
@@ -282,9 +302,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				041BB1BE1BE50C5600BB75BA /* mlmlib.c in Sources */,
+				04FEC12A1BE8054400C12D0D /* MLM3ColorLevelIndicator.m in Sources */,
+				04FEC1301BE81A0600C12D0D /* MLMRangeLevelIndicator.m in Sources */,
 				045395211BE185AB005B84E2 /* MLMModel.m in Sources */,
 				045394F41BE174B7005B84E2 /* main.m in Sources */,
+				04FEC1331BE81A2400C12D0D /* MLMRangeLevelIndicatorCell.m in Sources */,
 				0404B9761BE2B2290028416A /* AudioInput.m in Sources */,
+				04FEC12D1BE8058700C12D0D /* MLM3ColorLevelIndicatorCell.m in Sources */,
 				045394F11BE174B7005B84E2 /* AppDelegate.m in Sources */,
 				0453951E1BE18495005B84E2 /* MLMValue.m in Sources */,
 			);
