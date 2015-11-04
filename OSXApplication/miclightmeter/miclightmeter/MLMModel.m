@@ -10,9 +10,14 @@
 #import "mlmlib.h"
 
 @interface MLMModel () {
-struct mlm *mlm;
+    struct mlm *mlm;
+    uint64_t timestampLastTransitionToLow;
+    bool isBelowLow;
 }
+
+- (void) _updateVariationFrequency: (float)lightLevel at: (uint64_t)timestamp;
 @end
+
 
 @implementation MLMModel
 
@@ -40,36 +45,24 @@ struct mlm *mlm;
     self.audioLevel.minValue = 0.2;
     self.audioLevel.maxValue = 0.9;
     self.audioLevel.curValue = 0;
-    self.audioLevel.belowMinColor = [NSColor yellowColor];
-    self.audioLevel.midColor = [NSColor greenColor];
-    self.audioLevel.aboveMaxColor = [NSColor yellowColor];
     
     self.lightLevel.absMinValue = 50.0;
-    self.lightLevel.absMaxValue = 10000.0;
-    self.lightLevel.minValue = 40.0;
-    self.lightLevel.maxValue = 80.0;
+    self.lightLevel.absMaxValue = 20000.0;
+    self.lightLevel.minValue = 50;
+    self.lightLevel.maxValue = 50;
     self.lightLevel.curValue = 50;
-    self.lightLevel.belowMinColor = [NSColor yellowColor];
-    self.lightLevel.midColor = [NSColor greenColor];
-    self.lightLevel.aboveMaxColor = [NSColor yellowColor];
     
-    self.variationSensitivity.absMinValue = 0.0;
-    self.variationSensitivity.absMaxValue = 100.0;
+    self.variationSensitivity.absMinValue = 50.0;
+    self.variationSensitivity.absMaxValue = 20000.0;
     self.variationSensitivity.minValue = 40.0;
     self.variationSensitivity.maxValue = 80.0;
     self.variationSensitivity.curValue = 50;
-    self.variationSensitivity.belowMinColor = [NSColor yellowColor];
-    self.variationSensitivity.midColor = [NSColor greenColor];
-    self.variationSensitivity.aboveMaxColor = [NSColor yellowColor];
     
     self.variationFrequency.absMinValue = 0.0;
     self.variationFrequency.absMaxValue = 100.0;
     self.variationFrequency.minValue = 40.0;
     self.variationFrequency.maxValue = 80.0;
     self.variationFrequency.curValue = 50;
-    self.variationFrequency.belowMinColor = [NSColor yellowColor];
-    self.variationFrequency.midColor = [NSColor greenColor];
-    self.variationFrequency.aboveMaxColor = [NSColor yellowColor];
     
 }
 
@@ -78,34 +71,54 @@ struct mlm *mlm;
     mlm_reset(mlm);
     self.lightLevel.minValue = self.lightLevel.curValue;
     self.lightLevel.maxValue = self.lightLevel.curValue;
+    self.lightLevel.curValue += 1;
+    self.lightLevel.curValue -= 1;
 }
 
 - (IBAction)resetVariationFrequency:(id)sender
 {
     NSLog(@"resetVariationFrequency");
+    self.variationFrequency.minValue = self.variationFrequency.curValue;
+    self.variationFrequency.maxValue = self.variationFrequency.curValue;
+    self.variationFrequency.curValue += 1;
+    self.variationFrequency.curValue -= 1;
 }
 
 - (IBAction)changeVariationSensitivity:(id)sender
 {
     NSSegmentedControl *ctl = (NSSegmentedControl *)sender;
-    int idx = ctl.selectedSegment;
-    NSLog(@"changeVariationSensitivity %d", idx);
-    if (idx == 0) {
+    NSInteger idx = ctl.selectedSegment;
+    NSLog(@"changeVariationSensitivity %ld", idx);
+    float delta = (self.variationSensitivity.absMaxValue - self.variationSensitivity.absMinValue) / 20;
+    if (idx == 2) {
         if (self.variationSensitivity.minValue > self.variationSensitivity.absMinValue) {
-            self.variationSensitivity.minValue--;
+            self.variationSensitivity.minValue -= delta;
         }
-        if (self.variationSensitivity.maxValue > self.variationSensitivity.absMaxValue) {
-            self.variationSensitivity.maxValue++;
+        if (self.variationSensitivity.maxValue < self.variationSensitivity.absMaxValue) {
+            self.variationSensitivity.maxValue += delta;
         }
     } else if (idx == 1) {
         self.variationSensitivity.minValue = self.lightLevel.minValue;
         self.variationSensitivity.maxValue = self.lightLevel.maxValue;
-    } else if (idx == 2) {
+    } else if (idx == 0) {
         if (self.variationSensitivity.minValue < self.variationSensitivity.maxValue) {
-            self.variationSensitivity.minValue++;
-            self.variationSensitivity.maxValue--;
+            self.variationSensitivity.minValue += delta;
+            self.variationSensitivity.maxValue -= delta;
+        }
+        if (self.variationSensitivity.minValue > self.variationSensitivity.maxValue) {
+            self.variationSensitivity.minValue = self.variationSensitivity.maxValue;
         }
     }
+    if (self.variationSensitivity.minValue < self.variationSensitivity.absMinValue) {
+        self.variationSensitivity.minValue = self.variationSensitivity.absMinValue;
+    }
+    if (self.variationSensitivity.maxValue > self.variationSensitivity.absMaxValue) {
+        self.variationSensitivity.maxValue = self.variationSensitivity.absMaxValue;
+    }
+    NSLog(@"changeVariationSensitivity now %f to %f",self.variationSensitivity.minValue, self.variationSensitivity.maxValue);
+    // Force redraw
+    self.variationSensitivity.curValue += 1;
+    self.variationSensitivity.curValue -= 1;
 }
 
 - (void)newInputDone: (void*)buffer
@@ -121,7 +134,7 @@ struct mlm *mlm;
     
     if (size == 0 || size &1 || buffer == NULL) return;
     long rate = (((size+2*channels-1)/(2*channels))*1000000)/duration;
-    NSLog(@"rate=%ld", rate);
+//    NSLog(@"rate=%ld", rate);
     mlm_samplerate(mlm, rate);
     mlm_threshold(mlm, 1);
     mlm_feed(mlm, sbuffer, size/2, channels);
@@ -133,20 +146,45 @@ struct mlm *mlm;
         float cur = mlm_current(mlm);
         float avg = mlm_average(mlm);
         self.lightLevel.minValue = min;
-        if (self.lightLevel.absMinValue > min) self.lightLevel.absMinValue = min;
+//        if (self.lightLevel.absMinValue > min) self.lightLevel.absMinValue = min;
         self.lightLevel.maxValue = max;
-        if (self.lightLevel.absMaxValue < max) self.lightLevel.absMaxValue = max;
+//        if (self.lightLevel.absMaxValue < max) self.lightLevel.absMaxValue = max;
         self.lightLevel.curValue = cur;
-        NSLog(@"min %f max %f avg %f cur %f", min, max, avg, cur);
+        self.variationSensitivity.curValue = cur;
+//        NSLog(@"min %f max %f avg %f cur %f", min, max, avg, cur);
         self.variationSensitivity.absMinValue = self.lightLevel.absMinValue;
         self.variationSensitivity.absMaxValue = self.lightLevel.absMaxValue;
+        
+        [self _updateVariationFrequency: cur at: timestamp];
     }
+}
+
+- (void) _updateVariationFrequency: (float)lightLevel at: (uint64_t)timestamp
+{
+    bool newIsBelowLow = lightLevel < self.variationSensitivity.minValue;
+    if (newIsBelowLow && !isBelowLow) {
+        // Have gone from above to below low.
+        if (timestampLastTransitionToLow) {
+            uint64_t deltaT = timestamp - timestampLastTransitionToLow;
+            float freq = 1000000.0 / deltaT;
+            NSLog(@"freq=%f", freq);
+            if (freq < self.variationFrequency.minValue) {
+                self.variationFrequency.minValue = freq;
+            }
+            if (freq > self.variationFrequency.maxValue) {
+                self.variationFrequency.maxValue = freq;
+            }
+            self.variationFrequency.curValue = freq;
+        }
+        timestampLastTransitionToLow = timestamp;
+    }
+    isBelowLow = newIsBelowLow;
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
 {
-    NSLog(@"mlmmodel observeValueForKeyPath:%@ ofObject:%@ change:%@ context:%p", keyPath, object, change, context);
+//    NSLog(@"mlmmodel observeValueForKeyPath:%@ ofObject:%@ change:%@ context:%p", keyPath, object, change, context);
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    NSLog(@"now mlmmodel observeValueForKeyPath:%@ ofObject:%@ change:%@ context:%p", keyPath, object, change, context);
+//    NSLog(@"now mlmmodel observeValueForKeyPath:%@ ofObject:%@ change:%@ context:%p", keyPath, object, change, context);
 }
 @end

@@ -26,7 +26,6 @@
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
     double level = (self.floatValue - self.minValue)/(self.maxValue- self.minValue);
     if (level > 1.0){level = 1.0;}
-    NSLog(@"Level: %a", level);
     if (self.leftColor == nil) self.leftColor = [NSColor yellowColor];
     if (self.midColor == nil) self.midColor = [NSColor greenColor];
     if (self.rightColor == nil) self.rightColor = [NSColor yellowColor];

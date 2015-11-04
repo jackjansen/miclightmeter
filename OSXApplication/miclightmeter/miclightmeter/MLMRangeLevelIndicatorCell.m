@@ -15,19 +15,6 @@
     double leftBoundary = (self.warningValue - self.minValue)/(self.maxValue- self.minValue);
     double rightBoundary = (self.criticalValue - self.minValue)/(self.maxValue- self.minValue);
     if (level > 1.0){level = 1.0;}
-    NSLog(@"Level: %a", level);
-    if (self.leftColor == nil) self.leftColor = [NSColor yellowColor];
-    if (self.midColor == nil) self.midColor = [NSColor greenColor];
-    if (self.rightColor == nil) self.rightColor = [NSColor yellowColor];
-#if 0
-    NSColor *fillColor;
-    if(self.floatValue < self.warningValue)
-        fillColor = self.leftColor;
-    else if(self.floatValue < self.criticalValue)
-        fillColor = self.midColor;
-    else
-        fillColor = self.rightColor;
-#endif
     
     
     NSRect levelRect = NSInsetRect(cellFrame, 2, 1);

@@ -15,10 +15,5 @@
 @property float minValue;
 @property float maxValue;
 @property float curValue;
-@property NSColor* belowMinColor;
-@property NSColor* midColor;
-@property NSColor* aboveMaxColor;
-
-- (void)resetMinMax;
 
 @end
