@@ -42,15 +42,21 @@
     valueRect = NSInsetRect(valueRect, -1, -1);
     
     NSBezierPath * levelPath;
-    levelPath = [NSBezierPath bezierPathWithRect:leftRect];
-    [self.leftColor setFill];
-    [levelPath fill];
-    levelPath = [NSBezierPath bezierPathWithRect:midRect];
-    [self.midColor setFill];
-    [levelPath fill];
-    levelPath = [NSBezierPath bezierPathWithRect:rightRect];
-    [self.rightColor setFill];
-    [levelPath fill];
+    if (self.leftColor) {
+        levelPath = [NSBezierPath bezierPathWithRect:leftRect];
+        [self.leftColor setFill];
+        [levelPath fill];
+    }
+    if (self.midColor) {
+        levelPath = [NSBezierPath bezierPathWithRect:midRect];
+        [self.midColor setFill];
+        [levelPath fill];
+    }
+    if (self.rightColor) {
+        levelPath = [NSBezierPath bezierPathWithRect:rightRect];
+        [self.rightColor setFill];
+        [levelPath fill];
+    }
     levelPath = [NSBezierPath bezierPathWithRect:valueRect];
     [[NSColor blackColor] setFill];
     [levelPath fill];
