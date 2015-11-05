@@ -46,31 +46,31 @@
     self.audioLevel.maxValue = 0.9;
     self.audioLevel.curValue = 0;
     
-    self.lightLevel.absMinValue = 50.0;
-    self.lightLevel.absMaxValue = 20000.0;
-    self.lightLevel.minValue = 50;
-    self.lightLevel.maxValue = 50;
-    self.lightLevel.curValue = 50;
+    self.lightLevel.absMinValue = 0.0;
+    self.lightLevel.absMaxValue = 1000.0;
+    self.lightLevel.minValue = 0;
+    self.lightLevel.maxValue = 0;
+    self.lightLevel.curValue = 0;
     
-    self.variationSensitivity.absMinValue = 50.0;
-    self.variationSensitivity.absMaxValue = 20000.0;
-    self.variationSensitivity.minValue = 40.0;
-    self.variationSensitivity.maxValue = 80.0;
-    self.variationSensitivity.curValue = 50;
+    self.variationSensitivity.absMinValue = 0.0;
+    self.variationSensitivity.absMaxValue = 1000.0;
+    self.variationSensitivity.minValue = 0;
+    self.variationSensitivity.maxValue = 0;
+    self.variationSensitivity.curValue = 00;
     
     self.variationFrequency.absMinValue = 0.0;
     self.variationFrequency.absMaxValue = 100.0;
-    self.variationFrequency.minValue = 40.0;
-    self.variationFrequency.maxValue = 80.0;
-    self.variationFrequency.curValue = 50;
+    self.variationFrequency.minValue = 0;
+    self.variationFrequency.maxValue = 0;
+    self.variationFrequency.curValue = 0;
     
 }
 
 - (IBAction)resetLightLevel:(id)sender
 {
     mlm_reset(mlm);
-    self.lightLevel.minValue = self.lightLevel.curValue;
-    self.lightLevel.maxValue = self.lightLevel.curValue;
+    self.lightLevel.minValue = self.lightLevel.absMinValue;
+    self.lightLevel.maxValue = self.lightLevel.absMinValue;
     self.lightLevel.curValue += 1;
     self.lightLevel.curValue -= 1;
 }
@@ -78,8 +78,8 @@
 - (IBAction)resetVariationFrequency:(id)sender
 {
     NSLog(@"resetVariationFrequency");
-    self.variationFrequency.minValue = self.variationFrequency.curValue;
-    self.variationFrequency.maxValue = self.variationFrequency.curValue;
+    self.variationFrequency.minValue = self.variationFrequency.absMinValue;
+    self.variationFrequency.maxValue = self.variationFrequency.absMinValue;
     self.variationFrequency.curValue += 1;
     self.variationFrequency.curValue -= 1;
 }
@@ -141,15 +141,17 @@
     float ppLevel = mlm_amplitude(mlm, sbuffer, size/2, channels) / 32768.0;
     self.audioLevel.curValue = ppLevel;
     if (mlm_ready(mlm)) {
+        // If we have light level data store it in the light level variables
         float min = mlm_min(mlm);
         float max = mlm_max(mlm);
         float cur = mlm_current(mlm);
         float avg = mlm_average(mlm);
         self.lightLevel.minValue = min;
-//        if (self.lightLevel.absMinValue > min) self.lightLevel.absMinValue = min;
         self.lightLevel.maxValue = max;
-//        if (self.lightLevel.absMaxValue < max) self.lightLevel.absMaxValue = max;
         self.lightLevel.curValue = cur;
+        self.lightLevel.avgValue = avg;
+        // Increase the maximum, if needed
+        if (self.lightLevel.absMaxValue < max) self.lightLevel.absMaxValue *= 2;
         self.variationSensitivity.curValue = cur;
 //        NSLog(@"min %f max %f avg %f cur %f", min, max, avg, cur);
         self.variationSensitivity.absMinValue = self.lightLevel.absMinValue;

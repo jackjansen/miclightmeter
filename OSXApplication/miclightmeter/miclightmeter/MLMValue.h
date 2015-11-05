@@ -15,5 +15,6 @@
 @property float minValue;
 @property float maxValue;
 @property float curValue;
+@property float avgValue;
 
 @end
