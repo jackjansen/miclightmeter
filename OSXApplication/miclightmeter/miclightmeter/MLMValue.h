@@ -16,5 +16,6 @@
 @property float maxValue;
 @property float curValue;
 @property float avgValue;
+@property BOOL valid;
 
 @end

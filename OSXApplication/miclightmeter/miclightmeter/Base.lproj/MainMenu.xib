@@ -743,6 +743,9 @@
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="m76-w1-MMv" name="enabled" keyPath="lightLevel.valid" id="B74-2M-eox"/>
+                        </connections>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tBZ-C4-Fea">
                         <rect key="frame" x="473" y="201" width="130" height="32"/>
@@ -763,6 +766,9 @@
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="m76-w1-MMv" name="enabled" keyPath="variationFrequency.valid" id="PhR-rO-bEN"/>
+                        </connections>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UXf-W1-gpj">
                         <rect key="frame" x="472" y="68" width="130" height="32"/>
@@ -907,6 +913,11 @@
                             <binding destination="m76-w1-MMv" name="value" keyPath="audioLevel.curValue" previousBinding="JK7-d6-FMo" id="g2h-tC-CLQ"/>
                             <binding destination="m76-w1-MMv" name="criticalValue" keyPath="audioLevel.maxValue" id="So3-a0-y2Q"/>
                             <binding destination="m76-w1-MMv" name="warningValue" keyPath="audioLevel.minValue" previousBinding="So3-a0-y2Q" id="0lD-2I-R5S"/>
+                            <binding destination="m76-w1-MMv" name="hidden" keyPath="audioLevel.valid" id="idT-8R-Qcb">
+                                <dictionary key="options">
+                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                </dictionary>
+                            </binding>
                         </connections>
                     </levelIndicator>
                     <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uYb-ZU-GwV" customClass="MLMRangeLevelIndicator">
@@ -919,6 +930,11 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
+                            <binding destination="m76-w1-MMv" name="hidden" keyPath="lightLevel.valid" id="4fm-Vn-VJk">
+                                <dictionary key="options">
+                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                </dictionary>
+                            </binding>
                             <binding destination="m76-w1-MMv" name="maxValue" keyPath="lightLevel.absMaxValue" id="nbm-7S-FvA"/>
                             <binding destination="m76-w1-MMv" name="minValue" keyPath="lightLevel.absMinValue" previousBinding="nbm-7S-FvA" id="ucw-62-7uJ"/>
                             <binding destination="m76-w1-MMv" name="value" keyPath="lightLevel.curValue" previousBinding="ucw-62-7uJ" id="WAY-2m-OAC"/>
@@ -936,6 +952,11 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
+                            <binding destination="m76-w1-MMv" name="hidden" keyPath="variationFrequency.valid" id="jA9-ji-gkX">
+                                <dictionary key="options">
+                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                </dictionary>
+                            </binding>
                             <binding destination="m76-w1-MMv" name="maxValue" keyPath="variationFrequency.absMaxValue" id="glz-TM-j5S"/>
                             <binding destination="m76-w1-MMv" name="minValue" keyPath="variationFrequency.absMinValue" previousBinding="glz-TM-j5S" id="Hpb-5O-Iwm"/>
                             <binding destination="m76-w1-MMv" name="value" keyPath="variationFrequency.curValue" previousBinding="Hpb-5O-Iwm" id="2xG-Vc-UKN"/>
