@@ -139,20 +139,18 @@
     short *sbuffer = (short *)buffer;
     
     if (size == 0 || size &1 || buffer == NULL) return;
-    long rate = (((size+2*channels-1)/(2*channels))*1000000)/duration;
+    double rate = 44100;
 //    NSLog(@"rate=%ld", rate);
-    mlm_samplerate(mlm, rate);
-    mlm_threshold(mlm, 128);
-    mlm_feed(mlm, sbuffer, size/2, channels);
-    float ppLevel = mlm_amplitude(mlm, sbuffer, size/2, channels) / 32768.0;
+    mlm_feedint(mlm, sbuffer, size, 2, channels);
+    float ppLevel = mlm_amplitude(mlm);
     self.audioLevel.curValue = ppLevel;
     self.audioLevel.valid = YES;
     if (mlm_ready(mlm)) {
         // If we have light level data store it in the light level variables
-        float min = mlm_min(mlm);
-        float max = mlm_max(mlm);
-        float cur = mlm_current(mlm);
-        float avg = mlm_average(mlm);
+        float min = rate / mlm_max(mlm);
+        float max = rate / mlm_min(mlm);
+        float cur = rate / mlm_current(mlm);
+        float avg = rate / mlm_average(mlm);
         self.lightLevel.minValue = min;
         self.lightLevel.maxValue = max;
         self.lightLevel.curValue = cur;

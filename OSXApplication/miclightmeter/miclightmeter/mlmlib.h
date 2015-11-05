@@ -11,10 +11,12 @@
 
 struct mlm {
     int mlm_curpolarity;
-    int mlm_threshold;
+    double mlm_sumsamples;
+    double mlm_sumabssamples;
+    long mlm_nsamples;
+    
     long mlm_last_to_positive;
     int mlm_initializing;
-    long mlm_samplerate;
     long mlm_minstretch;
     long mlm_maxstretch;
     long mlm_laststretch;
@@ -25,12 +27,12 @@ struct mlm {
 struct mlm* mlm_new();
 void mlm_destroy(struct mlm *mlm);
 void mlm_reset(struct mlm *mlm);
-void mlm_samplerate(struct mlm *mlm, long samplerate);
-void mlm_threshold(struct mlm *mlm, int threshold);
-int mlm_amplitude(struct mlm *mlm, short *data, int len, int channels);
-void mlm_feed(struct mlm *mlm, short *data, int len, int channels);
-void mlm_record(struct mlm *mlm, long nsample);
+void mlm_feedfloat(struct mlm *mlm, float *data, int nsamples, int channels);
+void mlm_feedint(struct mlm *mlm, void *data, int nbytes, int nbytepersample, int channels);
+void mlm_feedone(struct mlm *mlm, float sample);
+
 int mlm_ready(struct mlm *mlm);
+double mlm_amplitude(struct mlm *mlm);
 double mlm_min(struct mlm *mlm);
 double mlm_max(struct mlm *mlm);
 double mlm_average(struct mlm *mlm);
