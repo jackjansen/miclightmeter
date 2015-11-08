@@ -13,13 +13,11 @@
 @interface MLMModel : NSObject <AudioInputDelegate>
 @property IBOutlet MLMValue* audioLevel;
 @property IBOutlet MLMValue* lightLevel;
-@property IBOutlet MLMValue* variationSensitivity;
-@property IBOutlet MLMValue* variationFrequency;
+@property IBOutlet MLMValue* lightModulation;
 @property IBOutlet AudioInput* capturer;
 
 - (IBAction)resetLightLevel:(id)sender;
-- (IBAction)resetVariationFrequency:(id)sender;
-- (IBAction)changeVariationSensitivity:(id)sender;
+- (IBAction)resetLightModulation:(id)sender;
 
 /// Signals that a capture cycle has ended and provides audio data.
 /// @param buffer The audio data, as 16 bit signed integer samples

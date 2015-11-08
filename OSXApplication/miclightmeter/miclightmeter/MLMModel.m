@@ -15,23 +15,18 @@
     bool isBelowLow;
 }
 
-- (void) _updateVariationFrequency: (float)lightLevel at: (uint64_t)timestamp;
+- (void) _updateLightModulation: (float)lightLevel at: (uint64_t)timestamp;
 @end
 
 
 @implementation MLMModel
 
-//@property MLMValue* audioLevel;
-//@property MLMValue* lightLevel;
-//@property MLMValue* variationSensitivity;
-//@property MLMValue* variationFrequency;
 - (MLMModel *)init
 {
     if (self = [super init]) {
         self.audioLevel = [[MLMValue alloc] init];
         self.lightLevel = [[MLMValue alloc] init];
-        self.variationSensitivity = [[MLMValue alloc] init];
-        self.variationFrequency = [[MLMValue alloc] init];
+        self.lightModulation = [[MLMValue alloc] init];
         mlm = mlm_new();
     }
     return self;
@@ -54,19 +49,12 @@
     self.lightLevel.curValue = 0;
     self.lightLevel.valid = NO;
     
-    self.variationSensitivity.absMinValue = 0.0;
-    self.variationSensitivity.absMaxValue = 1000.0;
-    self.variationSensitivity.minValue = 0;
-    self.variationSensitivity.maxValue = 0;
-    self.variationSensitivity.curValue = 0;
-    self.variationSensitivity.valid = NO;
-    
-    self.variationFrequency.absMinValue = 0.0;
-    self.variationFrequency.absMaxValue = 100.0;
-    self.variationFrequency.minValue = 0;
-    self.variationFrequency.maxValue = 0;
-    self.variationFrequency.curValue = 0;
-    self.variationFrequency.valid = NO;
+    self.lightModulation.absMinValue = 0.0;
+    self.lightModulation.absMaxValue = 100.0;
+    self.lightModulation.minValue = 0;
+    self.lightModulation.maxValue = 0;
+    self.lightModulation.curValue = 0;
+    self.lightModulation.valid = NO;
     
 }
 
@@ -80,51 +68,14 @@
     self.lightLevel.valid = NO;
 }
 
-- (IBAction)resetVariationFrequency:(id)sender
+- (IBAction)resetLightModulation:(id)sender
 {
-    NSLog(@"resetVariationFrequency");
-    self.variationFrequency.minValue = self.variationFrequency.absMinValue;
-    self.variationFrequency.maxValue = self.variationFrequency.absMinValue;
-    self.variationFrequency.curValue += 1;
-    self.variationFrequency.curValue -= 1;
-    self.variationFrequency.valid = NO;
-}
-
-- (IBAction)changeVariationSensitivity:(id)sender
-{
-    NSSegmentedControl *ctl = (NSSegmentedControl *)sender;
-    NSInteger idx = ctl.selectedSegment;
-    NSLog(@"changeVariationSensitivity %ld", idx);
-    float delta = (self.variationSensitivity.absMaxValue - self.variationSensitivity.absMinValue) / 20;
-    if (idx == 2) {
-        if (self.variationSensitivity.minValue > self.variationSensitivity.absMinValue) {
-            self.variationSensitivity.minValue -= delta;
-        }
-        if (self.variationSensitivity.maxValue < self.variationSensitivity.absMaxValue) {
-            self.variationSensitivity.maxValue += delta;
-        }
-    } else if (idx == 1) {
-        self.variationSensitivity.minValue = self.lightLevel.minValue;
-        self.variationSensitivity.maxValue = self.lightLevel.maxValue;
-    } else if (idx == 0) {
-        if (self.variationSensitivity.minValue < self.variationSensitivity.maxValue) {
-            self.variationSensitivity.minValue += delta;
-            self.variationSensitivity.maxValue -= delta;
-        }
-        if (self.variationSensitivity.minValue > self.variationSensitivity.maxValue) {
-            self.variationSensitivity.minValue = self.variationSensitivity.maxValue;
-        }
-    }
-    if (self.variationSensitivity.minValue < self.variationSensitivity.absMinValue) {
-        self.variationSensitivity.minValue = self.variationSensitivity.absMinValue;
-    }
-    if (self.variationSensitivity.maxValue > self.variationSensitivity.absMaxValue) {
-        self.variationSensitivity.maxValue = self.variationSensitivity.absMaxValue;
-    }
-    NSLog(@"changeVariationSensitivity now %f to %f",self.variationSensitivity.minValue, self.variationSensitivity.maxValue);
-    // Force redraw
-    self.variationSensitivity.curValue += 1;
-    self.variationSensitivity.curValue -= 1;
+    NSLog(@"resetLightModulation");
+    self.lightModulation.minValue = self.lightModulation.absMinValue;
+    self.lightModulation.maxValue = self.lightModulation.absMinValue;
+    self.lightModulation.curValue += 1;
+    self.lightModulation.curValue -= 1;
+    self.lightModulation.valid = NO;
 }
 
 - (void)newInputDone: (void*)buffer
@@ -158,32 +109,26 @@
         self.lightLevel.valid = YES;
         // Increase the maximum, if needed
         if (self.lightLevel.absMaxValue < max) self.lightLevel.absMaxValue *= 2;
-        self.variationSensitivity.curValue = cur;
-//        NSLog(@"min %f max %f avg %f cur %f", min, max, avg, cur);
-        self.variationSensitivity.absMinValue = self.lightLevel.absMinValue;
-        self.variationSensitivity.absMaxValue = self.lightLevel.absMaxValue;
-        
-        
-        [self _updateVariationFrequency: cur at: timestamp];
+        [self _updateLightModulation: cur at: timestamp];
     }
 }
 
-- (void) _updateVariationFrequency: (float)lightLevel at: (uint64_t)timestamp
+- (void) _updateLightModulation: (float)lightLevel at: (uint64_t)timestamp
 {
-    bool newIsBelowLow = lightLevel < self.variationSensitivity.minValue;
+    bool newIsBelowLow = lightLevel < self.lightLevel.avgValue; // xxxjack temp
     if (newIsBelowLow && !isBelowLow) {
         // Have gone from above to below low.
         if (timestampLastTransitionToLow) {
             uint64_t deltaT = timestamp - timestampLastTransitionToLow;
             float freq = 1000000.0 / deltaT;
             NSLog(@"freq=%f", freq);
-            if (freq < self.variationFrequency.minValue) {
-                self.variationFrequency.minValue = freq;
+            if (freq < self.lightModulation.minValue) {
+                self.lightModulation.minValue = freq;
             }
-            if (freq > self.variationFrequency.maxValue) {
-                self.variationFrequency.maxValue = freq;
+            if (freq > self.lightModulation.maxValue) {
+                self.lightModulation.maxValue = freq;
             }
-            self.variationFrequency.curValue = freq;
+            self.lightModulation.curValue = freq;
         }
         timestampLastTransitionToLow = timestamp;
     }

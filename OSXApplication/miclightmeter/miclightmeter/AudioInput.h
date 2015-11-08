@@ -23,8 +23,6 @@
                   at: (uint64_t)timestamp
             duration: (uint64_t)duration;
 
-- (void)reportAudioLevel: (float) level;
-
 @end
 
 @interface AudioInput : NSObject <AVCaptureAudioDataOutputSampleBufferDelegate> {

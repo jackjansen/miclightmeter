@@ -681,14 +681,14 @@
         <window title="miclightmeter" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="609" height="330"/>
+            <rect key="contentRect" x="335" y="390" width="609" height="273"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="609" height="330"/>
+                <rect key="frame" x="0.0" y="0.0" width="609" height="273"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qsc-SF-NXx">
-                        <rect key="frame" x="18" y="268" width="111" height="17"/>
+                        <rect key="frame" x="18" y="211" width="111" height="17"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Audio Level (P/P):" id="mDB-Sl-Nwq">
                             <font key="font" metaFont="system"/>
@@ -697,7 +697,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1bO-QS-y9Z">
-                        <rect key="frame" x="18" y="293" width="122" height="17"/>
+                        <rect key="frame" x="18" y="236" width="122" height="17"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Audio Input Device:" id="V9R-0E-qM0">
                             <font key="font" metaFont="system"/>
@@ -706,7 +706,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y21-HJ-lK5">
-                        <rect key="frame" x="151" y="293" width="320" height="17"/>
+                        <rect key="frame" x="151" y="236" width="320" height="17"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Unknown" id="hGm-ae-mEV">
                             <font key="font" metaFont="system"/>
@@ -718,7 +718,7 @@
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KgF-Y7-JZ4">
-                        <rect key="frame" x="18" y="214" width="74" height="17"/>
+                        <rect key="frame" x="18" y="157" width="74" height="17"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Light Level:" id="1RP-QA-9oC">
                             <font key="font" metaFont="system"/>
@@ -727,7 +727,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2GR-U9-9Fr">
-                        <rect key="frame" x="151" y="164" width="30" height="17"/>
+                        <rect key="frame" x="151" y="107" width="30" height="17"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Min:" id="br2-RP-ZKp">
                             <font key="font" metaFont="system"/>
@@ -735,22 +735,10 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AoN-P6-ZEi">
-                        <rect key="frame" x="18" y="136" width="128" height="17"/>
-                        <animations/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Variation Sensitivity:" id="WfW-xc-HcX">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                        <connections>
-                            <binding destination="m76-w1-MMv" name="enabled" keyPath="lightLevel.valid" id="B74-2M-eox"/>
-                        </connections>
-                    </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tBZ-C4-Fea">
-                        <rect key="frame" x="473" y="201" width="130" height="32"/>
+                        <rect key="frame" x="501" y="144" width="75" height="32"/>
                         <animations/>
-                        <buttonCell key="cell" type="push" title="Reset Min/Max" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IAn-oH-WqO">
+                        <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IAn-oH-WqO">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -759,21 +747,18 @@
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vES-07-JRh">
-                        <rect key="frame" x="18" y="78" width="129" height="17"/>
+                        <rect key="frame" x="18" y="78" width="110" height="17"/>
                         <animations/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Variation Frequency:" id="MFO-cH-yT7">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Light Modulation:" id="MFO-cH-yT7">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
-                        <connections>
-                            <binding destination="m76-w1-MMv" name="enabled" keyPath="variationFrequency.valid" id="PhR-rO-bEN"/>
-                        </connections>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UXf-W1-gpj">
-                        <rect key="frame" x="472" y="68" width="130" height="32"/>
+                        <rect key="frame" x="500" y="68" width="75" height="32"/>
                         <animations/>
-                        <buttonCell key="cell" type="push" title="Reset Min/Max" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fiq-Vh-7ub">
+                        <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fiq-Vh-7ub">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -781,23 +766,8 @@
                             <action selector="resetVariationFrequency:" target="m76-w1-MMv" id="ANO-3u-ybD"/>
                         </connections>
                     </button>
-                    <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n8W-U3-HZB">
-                        <rect key="frame" x="477" y="129" width="120" height="24"/>
-                        <animations/>
-                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="aSo-Wy-hDr">
-                            <font key="font" metaFont="system"/>
-                            <segments>
-                                <segment label="⤇⤆"/>
-                                <segment label="↩︎" tag="1"/>
-                                <segment label="⟺" tag="2"/>
-                            </segments>
-                        </segmentedCell>
-                        <connections>
-                            <action selector="changeVariationSensitivity:" target="m76-w1-MMv" id="gb5-71-jNI"/>
-                        </connections>
-                    </segmentedControl>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jGw-SD-UAE">
-                        <rect key="frame" x="151" y="243" width="37" height="17"/>
+                        <rect key="frame" x="151" y="186" width="37" height="17"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="0" id="dgG-ZV-QSo">
                             <font key="font" metaFont="smallSystem"/>
@@ -809,7 +779,7 @@
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BxT-vd-cZD">
-                        <rect key="frame" x="434" y="240" width="37" height="17"/>
+                        <rect key="frame" x="434" y="183" width="37" height="17"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="100%" id="rcI-Cd-rmR">
                             <font key="font" metaFont="smallSystem"/>
@@ -821,7 +791,7 @@
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aa6-R1-UaH">
-                        <rect key="frame" x="151" y="189" width="46" height="17"/>
+                        <rect key="frame" x="151" y="132" width="46" height="17"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="absmin" id="vqc-4p-G4H">
                             <font key="font" metaFont="smallSystem"/>
@@ -833,7 +803,7 @@
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cmE-sn-ByL">
-                        <rect key="frame" x="422" y="186" width="49" height="17"/>
+                        <rect key="frame" x="422" y="129" width="49" height="17"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="absmax" id="tAh-pC-Kg9">
                             <font key="font" metaFont="smallSystem"/>
@@ -844,56 +814,34 @@
                             <binding destination="m76-w1-MMv" name="value" keyPath="lightLevel.absMaxValue" id="AvX-je-Jqe"/>
                         </connections>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m1L-i1-pT4">
-                        <rect key="frame" x="151" y="111" width="46" height="17"/>
-                        <animations/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="absmin" id="U90-7A-fdP">
-                            <font key="font" metaFont="smallSystem"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                        <connections>
-                            <binding destination="m76-w1-MMv" name="value" keyPath="variationSensitivity.absMinValue" id="seU-92-sQi"/>
-                        </connections>
-                    </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lvi-1J-Rsw">
-                        <rect key="frame" x="422" y="108" width="49" height="17"/>
-                        <animations/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="absmax" id="pHf-N7-CWw">
-                            <font key="font" metaFont="smallSystem"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                        <connections>
-                            <binding destination="m76-w1-MMv" name="value" keyPath="variationSensitivity.absMaxValue" id="xTy-gq-aSd"/>
-                        </connections>
-                    </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sZL-Hu-Mpz">
                         <rect key="frame" x="151" y="53" width="46" height="17"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="0 Hz" id="0I5-nD-kbd">
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" positiveFormat="# Hz" negativeFormat="# Hz" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" id="mxI-NX-l4z"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="m76-w1-MMv" name="value" keyPath="variationFrequency.absMinValue" id="I3U-AJ-NZH"/>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="lightModulation.absMinValue" id="ZFp-9n-0Co"/>
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vmp-zJ-Ial">
                         <rect key="frame" x="422" y="50" width="49" height="17"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="1000 Hz" id="5Tn-YM-Nm9">
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" positiveFormat="# Hz" negativeFormat="# Hz" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="2000000000" id="uXF-7X-16T"/>
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="m76-w1-MMv" name="value" keyPath="variationFrequency.absMaxValue" id="lFE-zm-ajP"/>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="lightModulation.absMaxValue" id="bfa-Aa-bea"/>
                         </connections>
                     </textField>
                     <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wdg-4e-3Ih" customClass="MLM3ColorLevelIndicator">
-                        <rect key="frame" x="153" y="268" width="316" height="16"/>
+                        <rect key="frame" x="153" y="211" width="316" height="16"/>
                         <animations/>
                         <levelIndicatorCell key="cell" alignment="left" maxValue="1" numberOfMajorTickMarks="10" levelIndicatorStyle="continuousCapacity" id="4Nl-82-tqj" customClass="MLM3ColorLevelIndicatorCell"/>
                         <userDefinedRuntimeAttributes>
@@ -921,7 +869,7 @@
                         </connections>
                     </levelIndicator>
                     <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uYb-ZU-GwV" customClass="MLMRangeLevelIndicator">
-                        <rect key="frame" x="153" y="213" width="316" height="16"/>
+                        <rect key="frame" x="153" y="156" width="316" height="16"/>
                         <animations/>
                         <levelIndicatorCell key="cell" enabled="NO" alignment="left" doubleValue="2" maxValue="2" warningValue="2" criticalValue="2" levelIndicatorStyle="continuousCapacity" id="uzh-S8-CeZ" customClass="MLMRangeLevelIndicatorCell"/>
                         <userDefinedRuntimeAttributes>
@@ -930,16 +878,16 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
-                            <binding destination="m76-w1-MMv" name="hidden" keyPath="lightLevel.valid" id="4fm-Vn-VJk">
-                                <dictionary key="options">
-                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                </dictionary>
-                            </binding>
                             <binding destination="m76-w1-MMv" name="maxValue" keyPath="lightLevel.absMaxValue" id="nbm-7S-FvA"/>
                             <binding destination="m76-w1-MMv" name="minValue" keyPath="lightLevel.absMinValue" previousBinding="nbm-7S-FvA" id="ucw-62-7uJ"/>
                             <binding destination="m76-w1-MMv" name="value" keyPath="lightLevel.curValue" previousBinding="ucw-62-7uJ" id="WAY-2m-OAC"/>
                             <binding destination="m76-w1-MMv" name="criticalValue" keyPath="lightLevel.maxValue" id="C3g-6C-XlK"/>
                             <binding destination="m76-w1-MMv" name="warningValue" keyPath="lightLevel.minValue" previousBinding="C3g-6C-XlK" id="ebd-gt-fJL"/>
+                            <binding destination="m76-w1-MMv" name="hidden" keyPath="lightLevel.valid" id="4fm-Vn-VJk">
+                                <dictionary key="options">
+                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                </dictionary>
+                            </binding>
                         </connections>
                     </levelIndicator>
                     <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="srS-UP-MYT" customClass="MLMRangeLevelIndicator">
@@ -952,40 +900,20 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
-                            <binding destination="m76-w1-MMv" name="hidden" keyPath="variationFrequency.valid" id="jA9-ji-gkX">
+                            <binding destination="m76-w1-MMv" name="criticalValue" keyPath="lightModulation.maxValue" id="UKw-d2-jAD"/>
+                            <binding destination="m76-w1-MMv" name="hidden" keyPath="lightModulation.valid" id="BqY-Vd-eZB">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">NSNegateBoolean</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="m76-w1-MMv" name="maxValue" keyPath="variationFrequency.absMaxValue" id="glz-TM-j5S"/>
-                            <binding destination="m76-w1-MMv" name="minValue" keyPath="variationFrequency.absMinValue" previousBinding="glz-TM-j5S" id="Hpb-5O-Iwm"/>
-                            <binding destination="m76-w1-MMv" name="value" keyPath="variationFrequency.curValue" previousBinding="Hpb-5O-Iwm" id="2xG-Vc-UKN"/>
-                            <binding destination="m76-w1-MMv" name="criticalValue" keyPath="variationFrequency.maxValue" id="kcs-BO-6DA"/>
-                            <binding destination="m76-w1-MMv" name="warningValue" keyPath="variationFrequency.minValue" previousBinding="kcs-BO-6DA" id="i9S-Iw-yBU"/>
-                        </connections>
-                    </levelIndicator>
-                    <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNK-Gt-boP" customClass="MLMRangeLevelIndicator">
-                        <rect key="frame" x="153" y="136" width="316" height="16"/>
-                        <animations/>
-                        <levelIndicatorCell key="cell" alignment="left" doubleValue="2" maxValue="2" warningValue="2" criticalValue="2" levelIndicatorStyle="continuousCapacity" id="ghu-aE-58H" customClass="MLMRangeLevelIndicatorCell"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="leftColor">
-                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="rightColor">
-                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                        <connections>
-                            <binding destination="m76-w1-MMv" name="maxValue" keyPath="variationSensitivity.absMaxValue" id="RVX-f0-JbK"/>
-                            <binding destination="m76-w1-MMv" name="minValue" keyPath="variationSensitivity.absMinValue" previousBinding="RVX-f0-JbK" id="EVf-Xb-x0p"/>
-                            <binding destination="m76-w1-MMv" name="value" keyPath="variationSensitivity.curValue" previousBinding="EVf-Xb-x0p" id="E4i-AX-vIh"/>
-                            <binding destination="m76-w1-MMv" name="criticalValue" keyPath="variationSensitivity.maxValue" id="VMM-Te-BzL"/>
-                            <binding destination="m76-w1-MMv" name="warningValue" keyPath="variationSensitivity.minValue" previousBinding="VMM-Te-BzL" id="kuJ-N4-kfF"/>
+                            <binding destination="m76-w1-MMv" name="maxValue" keyPath="lightModulation.absMaxValue" id="ZlZ-mq-mnV"/>
+                            <binding destination="m76-w1-MMv" name="minValue" keyPath="lightModulation.absMinValue" previousBinding="ZlZ-mq-mnV" id="Wif-cp-0fY"/>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="lightModulation.curValue" previousBinding="Wif-cp-0fY" id="8Sd-fV-TMI"/>
+                            <binding destination="m76-w1-MMv" name="warningValue" keyPath="lightModulation.minValue" previousBinding="UKw-d2-jAD" id="IkW-Gl-Sra"/>
                         </connections>
                     </levelIndicator>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gOk-1x-xaI">
-                        <rect key="frame" x="250" y="164" width="33" height="17"/>
+                        <rect key="frame" x="250" y="107" width="33" height="17"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Max:" id="pGl-Da-xe8">
                             <font key="font" metaFont="system"/>
@@ -994,7 +922,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1bw-J5-gnv">
-                        <rect key="frame" x="357" y="164" width="30" height="17"/>
+                        <rect key="frame" x="357" y="107" width="30" height="17"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Cur:" id="oQa-lS-Yir">
                             <font key="font" metaFont="system"/>
@@ -1003,7 +931,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="goc-5h-fhm">
-                        <rect key="frame" x="465" y="164" width="31" height="17"/>
+                        <rect key="frame" x="465" y="107" width="31" height="17"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Avg:" id="rUb-1z-nYz">
                             <font key="font" metaFont="system"/>
@@ -1012,7 +940,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1PV-wT-vpD">
-                        <rect key="frame" x="286" y="161" width="65" height="22"/>
+                        <rect key="frame" x="286" y="104" width="65" height="22"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" title="maxvalue" id="WZO-Lu-1Jp">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" localizesFormat="NO" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="yIh-cL-iix"/>
@@ -1025,7 +953,7 @@
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wAM-hS-Hlb">
-                        <rect key="frame" x="393" y="161" width="65" height="22"/>
+                        <rect key="frame" x="393" y="104" width="65" height="22"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" title="curvalue" id="jUA-5m-XNF">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" localizesFormat="NO" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="Sxi-fH-vW8"/>
@@ -1038,7 +966,7 @@
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ctw-uz-lik">
-                        <rect key="frame" x="502" y="161" width="65" height="22"/>
+                        <rect key="frame" x="502" y="104" width="65" height="22"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" title="avgvalue" id="iSP-m5-EAJ">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" localizesFormat="NO" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="gPF-Qw-Nnk"/>
@@ -1096,7 +1024,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="m76-w1-MMv" name="value" keyPath="variationFrequency.minValue" id="VP7-rx-ogu"/>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="lightModulation.minValue" id="egz-bv-BwM"/>
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Irt-Py-tSW">
@@ -1109,7 +1037,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="m76-w1-MMv" name="value" keyPath="variationFrequency.maxValue" id="kzO-yZ-yru"/>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="lightModulation.maxValue" id="oYb-0t-Nci"/>
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6er-Wm-hrr">
@@ -1122,7 +1050,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="m76-w1-MMv" name="value" keyPath="variationFrequency.curValue" id="67G-zT-qip"/>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="lightModulation.curValue" id="rsd-WL-kXe"/>
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZNa-m5-hTa">
@@ -1135,11 +1063,11 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="m76-w1-MMv" name="value" keyPath="variationFrequency.avgValue" id="wRc-UC-hoK"/>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="lightModulation.avgValue" id="98f-1o-Dlw"/>
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uch-uz-npj">
-                        <rect key="frame" x="183" y="161" width="61" height="22"/>
+                        <rect key="frame" x="183" y="104" width="61" height="22"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" title="minvalue" id="IY2-uL-3oR">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" localizesFormat="NO" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="TO3-KR-Zbf"/>
@@ -1154,7 +1082,7 @@
                 </subviews>
                 <animations/>
             </view>
-            <point key="canvasLocation" x="375.5" y="348"/>
+            <point key="canvasLocation" x="375.5" y="319.5"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="kOh-i5-k4A"/>
     </objects>
