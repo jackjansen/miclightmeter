@@ -9,6 +9,12 @@
 #ifndef mlmlib_h
 #define mlmlib_h
 
+#define _MLM_LOCK_DATASTRUCT /* nothing */
+#define _MLM_LOCK_ALLOC /* nothing */
+#define _MLM_LOCK_ENTER /* nothing */
+#define _MLM_LOCK_LEAVE /* nothing */
+#define _MLM_LOCK_FREE /* nothing */
+
 struct mlm {
     int mlm_curpolarity;
     double mlm_sumsamples;
@@ -22,6 +28,12 @@ struct mlm {
     long mlm_laststretch;
     long mlm_allstretch;
     long mlm_nstretch;
+    
+    long *mlm_stretches;
+    int mlm_stretches_size;
+    int mlm_stretches_in;
+    int mlm_stretches_out;
+    _MLM_LOCK_DATASTRUCT
 };
 
 struct mlm* mlm_new();
@@ -37,5 +49,5 @@ double mlm_min(struct mlm *mlm);
 double mlm_max(struct mlm *mlm);
 double mlm_average(struct mlm *mlm);
 double mlm_current(struct mlm *mlm);
-
+double mlm_consume(struct mlm *mlm);
 #endif /* mlmlib_h */

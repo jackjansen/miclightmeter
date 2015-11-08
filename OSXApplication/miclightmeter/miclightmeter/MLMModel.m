@@ -10,9 +10,8 @@
 #import "mlmlib.h"
 
 @interface MLMModel () {
-    struct mlm *mlm;
-    uint64_t timestampLastTransitionToLow;
-    bool isBelowLow;
+    struct mlm *lightMeter;
+    struct mlm *modulationMeter;
 }
 
 - (void) _updateLightModulation: (float)lightLevel at: (uint64_t)timestamp;
@@ -27,7 +26,8 @@
         self.audioLevel = [[MLMValue alloc] init];
         self.lightLevel = [[MLMValue alloc] init];
         self.lightModulation = [[MLMValue alloc] init];
-        mlm = mlm_new();
+        lightMeter = mlm_new();
+        modulationMeter = mlm_new();
     }
     return self;
 }
@@ -43,7 +43,7 @@
     self.audioLevel.valid = NO;
     
     self.lightLevel.absMinValue = 0.0;
-    self.lightLevel.absMaxValue = 1000.0;
+    self.lightLevel.absMaxValue = 100.0;
     self.lightLevel.minValue = 0;
     self.lightLevel.maxValue = 0;
     self.lightLevel.curValue = 0;
@@ -60,17 +60,19 @@
 
 - (IBAction)resetLightLevel:(id)sender
 {
-    mlm_reset(mlm);
+    mlm_reset(lightMeter);
     self.lightLevel.minValue = self.lightLevel.absMinValue;
     self.lightLevel.maxValue = self.lightLevel.absMinValue;
     self.lightLevel.curValue += 1;
     self.lightLevel.curValue -= 1;
     self.lightLevel.valid = NO;
+    [self resetLightModulation: self];
 }
 
 - (IBAction)resetLightModulation:(id)sender
 {
     NSLog(@"resetLightModulation");
+    mlm_reset(modulationMeter);
     self.lightModulation.minValue = self.lightModulation.absMinValue;
     self.lightModulation.maxValue = self.lightModulation.absMinValue;
     self.lightModulation.curValue += 1;
@@ -90,49 +92,44 @@
     short *sbuffer = (short *)buffer;
     
     if (size == 0 || size &1 || buffer == NULL) return;
-    double rate = 44100;
-//    NSLog(@"rate=%ld", rate);
-    mlm_feedint(mlm, sbuffer, size, 2, channels);
-    float ppLevel = mlm_amplitude(mlm);
+    mlm_feedint(lightMeter, sbuffer, size, 2, channels);
+    float ppLevel = mlm_amplitude(lightMeter);
     self.audioLevel.curValue = ppLevel;
     self.audioLevel.valid = YES;
-    if (mlm_ready(mlm)) {
-        // If we have light level data store it in the light level variables
-        float min = rate / mlm_max(mlm);
-        float max = rate / mlm_min(mlm);
-        float cur = rate / mlm_current(mlm);
-        float avg = rate / mlm_average(mlm);
+    if (mlm_ready(lightMeter)) {
+        // We measure periods (with a value of 1 being 1/samplefreq seconds), but we want
+        // the scale to be increasing light levels to the right, so we invert.
+        float min = self.lightLevel.absMaxValue - mlm_max(lightMeter);
+        float max = self.lightLevel.absMaxValue - mlm_min(lightMeter);
+        float cur = self.lightLevel.absMaxValue - mlm_current(lightMeter);
+        float avg = self.lightLevel.absMaxValue - mlm_average(lightMeter);
         self.lightLevel.minValue = min;
         self.lightLevel.maxValue = max;
         self.lightLevel.curValue = cur;
         self.lightLevel.avgValue = avg;
         self.lightLevel.valid = YES;
-        // Increase the maximum, if needed
-        if (self.lightLevel.absMaxValue < max) self.lightLevel.absMaxValue *= 2;
-        [self _updateLightModulation: cur at: timestamp];
+        // Update modulation
+        while ((cur=mlm_consume(lightMeter)) > 0) {
+            [self _updateLightModulation: cur at: timestamp];
+        }
     }
 }
 
 - (void) _updateLightModulation: (float)lightLevel at: (uint64_t)timestamp
 {
-    bool newIsBelowLow = lightLevel < self.lightLevel.avgValue; // xxxjack temp
-    if (newIsBelowLow && !isBelowLow) {
-        // Have gone from above to below low.
-        if (timestampLastTransitionToLow) {
-            uint64_t deltaT = timestamp - timestampLastTransitionToLow;
-            float freq = 1000000.0 / deltaT;
-            NSLog(@"freq=%f", freq);
-            if (freq < self.lightModulation.minValue) {
-                self.lightModulation.minValue = freq;
-            }
-            if (freq > self.lightModulation.maxValue) {
-                self.lightModulation.maxValue = freq;
-            }
-            self.lightModulation.curValue = freq;
-        }
-        timestampLastTransitionToLow = timestamp;
+    mlm_feedone(modulationMeter, lightLevel);
+    NSLog(@"lightLevel %f", lightLevel);
+    if (mlm_ready(modulationMeter)) {
+        float min = mlm_max(modulationMeter);
+        float max = mlm_min(modulationMeter);
+        float cur = mlm_current(modulationMeter);
+        float avg = mlm_average(modulationMeter);
+        self.lightModulation.minValue = min;
+        self.lightModulation.maxValue = max;
+        self.lightModulation.curValue = cur;
+        self.lightModulation.avgValue = avg;
+        self.lightModulation.valid = YES;
     }
-    isBelowLow = newIsBelowLow;
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context

@@ -900,16 +900,16 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
+                            <binding destination="m76-w1-MMv" name="maxValue" keyPath="lightModulation.absMaxValue" id="ZlZ-mq-mnV"/>
+                            <binding destination="m76-w1-MMv" name="minValue" keyPath="lightModulation.absMinValue" previousBinding="ZlZ-mq-mnV" id="Wif-cp-0fY"/>
+                            <binding destination="m76-w1-MMv" name="value" keyPath="lightModulation.curValue" previousBinding="Wif-cp-0fY" id="8Sd-fV-TMI"/>
                             <binding destination="m76-w1-MMv" name="criticalValue" keyPath="lightModulation.maxValue" id="UKw-d2-jAD"/>
+                            <binding destination="m76-w1-MMv" name="warningValue" keyPath="lightModulation.minValue" previousBinding="UKw-d2-jAD" id="IkW-Gl-Sra"/>
                             <binding destination="m76-w1-MMv" name="hidden" keyPath="lightModulation.valid" id="BqY-Vd-eZB">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">NSNegateBoolean</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="m76-w1-MMv" name="maxValue" keyPath="lightModulation.absMaxValue" id="ZlZ-mq-mnV"/>
-                            <binding destination="m76-w1-MMv" name="minValue" keyPath="lightModulation.absMinValue" previousBinding="ZlZ-mq-mnV" id="Wif-cp-0fY"/>
-                            <binding destination="m76-w1-MMv" name="value" keyPath="lightModulation.curValue" previousBinding="Wif-cp-0fY" id="8Sd-fV-TMI"/>
-                            <binding destination="m76-w1-MMv" name="warningValue" keyPath="lightModulation.minValue" previousBinding="UKw-d2-jAD" id="IkW-Gl-Sra"/>
                         </connections>
                     </levelIndicator>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gOk-1x-xaI">
