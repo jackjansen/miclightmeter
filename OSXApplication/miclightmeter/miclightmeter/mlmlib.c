@@ -42,7 +42,7 @@ void mlm_reset(struct mlm *mlm)
     _MLM_LOCK_ENTER;
     mlm->mlm_curpolarity = 0;
     mlm->mlm_sumsamples = 0;
-    mlm->mlm_sumabssamples = 0;
+    mlm->mlm_sumabsdeltas = 0;
     mlm->mlm_nsamples = 0;
     mlm->mlm_last_to_positive = 0;
     mlm->mlm_initializing = 1;
@@ -53,24 +53,25 @@ void mlm_reset(struct mlm *mlm)
     _MLM_LOCK_LEAVE;
 }
 
-static void _mlm_feedsample(struct mlm *mlm, double sample)
+static void _mlm_feedsample(struct mlm *mlm, double sample, long duration)
 {
     
     // Update sums, for computing average and amplitude
-    mlm->mlm_sumsamples += sample;
-    mlm->mlm_sumabssamples += fabs(sample);
-    mlm->mlm_nsamples++;
+    mlm->mlm_nsamples += duration;
+    mlm->mlm_sumsamples += sample*duration;
+    double average = mlm->mlm_sumsamples / mlm->mlm_nsamples;
+    double delta = sample - average;
+    mlm->mlm_sumabsdeltas += fabs(delta)*duration;
     
     // Compute average and amplitude
-    double average = mlm->mlm_sumsamples / mlm->mlm_nsamples;
-    double amplitude = (mlm->mlm_sumabssamples-(average*mlm->mlm_nsamples)) / mlm->mlm_nsamples;
+    double amplitude = mlm->mlm_sumabsdeltas / mlm->mlm_nsamples;
     if (amplitude > -0.00001 && amplitude < 0.00001) amplitude = 0;
     assert(amplitude >= 0);
     double threshold = amplitude / 10;
     
     // Compute polarity as three-way value, taking average and threshold into account
-    int curpolarity = ((sample-average) < threshold ? -1 :
-                       ((sample-average) > threshold ? 1 : 0));
+    int curpolarity = (delta < threshold ? -1 :
+                       (delta > threshold ? 1 : 0));
     
     // Check whether we made a negative-to-positive or zero-to-positive transition
     if (curpolarity != mlm->mlm_curpolarity) {
@@ -100,7 +101,7 @@ static void _mlm_feedsample(struct mlm *mlm, double sample)
         }
         mlm->mlm_curpolarity = curpolarity;
     }
-    if (!mlm->mlm_initializing) mlm->mlm_last_to_positive++;
+    if (!mlm->mlm_initializing) mlm->mlm_last_to_positive += duration;
 }
 
 void mlm_feedfloat(struct mlm *mlm, float *data, int nsamples, int channels)
@@ -111,7 +112,7 @@ void mlm_feedfloat(struct mlm *mlm, float *data, int nsamples, int channels)
         float sample = *data;
         data += channels;
         nsamples -= channels;
-        _mlm_feedsample(mlm, sample);
+        _mlm_feedsample(mlm, sample, 1);
      }
     assert(nsamples == 0);
     _MLM_LOCK_LEAVE;
@@ -137,16 +138,16 @@ void mlm_feedint(struct mlm *mlm, void *data, int nbytes, int nbytepersample, in
         }
         data += channels*nbytepersample;
         nbytes -= channels*nbytepersample;
-        _mlm_feedsample(mlm, sample);
+        _mlm_feedsample(mlm, sample, 1);
     }
     assert(nbytes == 0);
     _MLM_LOCK_LEAVE;
 }
 
-void mlm_feedone(struct mlm *mlm, float sample)
+void mlm_feedmodulation(struct mlm *mlm, double duration)
 {
     _MLM_LOCK_ENTER;
-    _mlm_feedsample(mlm, (double)sample);
+    _mlm_feedsample(mlm, duration, (long)duration);
     _MLM_LOCK_LEAVE;
 }
 
@@ -154,8 +155,7 @@ double mlm_amplitude(struct mlm *mlm)
 {
     _MLM_LOCK_ENTER;
     // Compute average and amplitude
-    double average = mlm->mlm_sumsamples / mlm->mlm_nsamples;
-    double amplitude = (mlm->mlm_sumabssamples-(average*mlm->mlm_nsamples)) / mlm->mlm_nsamples;
+    double amplitude = mlm->mlm_sumabsdeltas / mlm->mlm_nsamples;
     if (amplitude > -0.00001 && amplitude < 0.00001) amplitude = 0;
     assert(amplitude >= 0);
     _MLM_LOCK_LEAVE;

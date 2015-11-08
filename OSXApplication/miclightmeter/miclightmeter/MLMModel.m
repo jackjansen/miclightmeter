@@ -50,7 +50,7 @@
     self.lightLevel.valid = NO;
     
     self.lightModulation.absMinValue = 0.0;
-    self.lightModulation.absMaxValue = 100.0;
+    self.lightModulation.absMaxValue = 1000.0;
     self.lightModulation.minValue = 0;
     self.lightModulation.maxValue = 0;
     self.lightModulation.curValue = 0;
@@ -117,13 +117,13 @@
 
 - (void) _updateLightModulation: (float)lightLevel at: (uint64_t)timestamp
 {
-    mlm_feedone(modulationMeter, lightLevel);
+    mlm_feedmodulation(modulationMeter, lightLevel);
     NSLog(@"lightLevel %f", lightLevel);
     if (mlm_ready(modulationMeter)) {
-        float min = mlm_max(modulationMeter);
-        float max = mlm_min(modulationMeter);
-        float cur = mlm_current(modulationMeter);
-        float avg = mlm_average(modulationMeter);
+        float min = 44100.0 / mlm_max(modulationMeter);
+        float max = 44100.0 / mlm_min(modulationMeter);
+        float cur = 44100.0 / mlm_current(modulationMeter);
+        float avg = 44100.0 / mlm_average(modulationMeter);
         self.lightModulation.minValue = min;
         self.lightModulation.maxValue = max;
         self.lightModulation.curValue = cur;

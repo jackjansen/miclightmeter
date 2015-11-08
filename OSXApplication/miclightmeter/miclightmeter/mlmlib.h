@@ -18,7 +18,7 @@
 struct mlm {
     int mlm_curpolarity;
     double mlm_sumsamples;
-    double mlm_sumabssamples;
+    double mlm_sumabsdeltas;
     long mlm_nsamples;
     
     long mlm_last_to_positive;
@@ -41,7 +41,7 @@ void mlm_destroy(struct mlm *mlm);
 void mlm_reset(struct mlm *mlm);
 void mlm_feedfloat(struct mlm *mlm, float *data, int nsamples, int channels);
 void mlm_feedint(struct mlm *mlm, void *data, int nbytes, int nbytepersample, int channels);
-void mlm_feedone(struct mlm *mlm, float sample);
+void mlm_feedmodulation(struct mlm *mlm, double duration);
 
 int mlm_ready(struct mlm *mlm);
 double mlm_amplitude(struct mlm *mlm);

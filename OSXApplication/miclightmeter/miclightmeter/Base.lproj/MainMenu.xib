@@ -755,17 +755,6 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UXf-W1-gpj">
-                        <rect key="frame" x="500" y="68" width="75" height="32"/>
-                        <animations/>
-                        <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fiq-Vh-7ub">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="resetVariationFrequency:" target="m76-w1-MMv" id="ANO-3u-ybD"/>
-                        </connections>
-                    </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jGw-SD-UAE">
                         <rect key="frame" x="151" y="186" width="37" height="17"/>
                         <animations/>
@@ -1079,6 +1068,17 @@
                             <binding destination="m76-w1-MMv" name="value" keyPath="lightLevel.minValue" id="bSp-WE-zHR"/>
                         </connections>
                     </textField>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UXf-W1-gpj">
+                        <rect key="frame" x="501" y="68" width="75" height="32"/>
+                        <animations/>
+                        <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fiq-Vh-7ub">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="resetLightModulation:" target="m76-w1-MMv" id="Bin-gZ-Nb9"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <animations/>
             </view>
