@@ -50,4 +50,6 @@ double mlm_max(struct mlm *mlm);
 double mlm_average(struct mlm *mlm);
 double mlm_current(struct mlm *mlm);
 double mlm_consume(struct mlm *mlm);
+
+int mlm_generate(short *buffer, int bufferSize, float minLevel, float maxLevel, float sweepFreq, int wantWAVheader);
 #endif /* mlmlib_h */

@@ -230,3 +230,56 @@ double mlm_consume(struct mlm *mlm) {
     _MLM_LOCK_LEAVE;
     return rv;
 }
+
+int mlm_generate(short *buffer, int bufferSize, float minLevel, float maxLevel, float sweepFreq, int wantWAVHeader)
+{
+    // WAV header type
+    struct WAVHeader {
+        int dummy; // xxxjack nonsense....
+    } *wavHeader;
+    
+    // First compute datasize needed
+    int wantedSize = 0;
+    int nSample = 0;
+    if (wantWAVHeader) wantedSize += sizeof(struct WAVHeader);
+    if (sweepFreq > 0 && minLevel != maxLevel) {
+        nSample = 44100 / sweepFreq;
+    } else {
+        assert(minLevel == maxLevel);
+        nSample = 100;
+    }
+    wantedSize += 2*sizeof(short)*nSample;
+    
+    if (buffer == NULL || bufferSize == 0) {
+        return wantedSize;
+    }
+    if (wantedSize > bufferSize) return -1;
+    
+    // Fill header, if needed
+    if (wantWAVHeader) {
+        wavHeader = (struct WAVHeader *)buffer;
+        buffer += (sizeof(struct WAVHeader)/sizeof(short));
+        wavHeader->dummy = 42; // xxxjack nonsense....
+    }
+    // Fill samples
+    float curOutputLevel = 0;
+    int curSample;
+    short curLeft = 0x7fff;
+    for (curSample = 0; curSample < nSample; curSample++) {
+        float curWantedOutputLevel = minLevel + ((float)curSample/(float)nSample) * (maxLevel-minLevel);
+        if (curOutputLevel < curWantedOutputLevel) {
+            // We should turn on the light. Output different L/R signals
+            *buffer++ = curLeft;
+            *buffer++ = -curLeft;
+        } else {
+            // We are over our level already, turn off the lighe, output same L/R signals
+            *buffer++ = curLeft;
+            *buffer++ = curLeft;
+        }
+        // Invert output sameple for the next round
+        curLeft = -curLeft;
+        // Increase
+        curOutputLevel += 0.42; // xxxjack nonsense....
+    }
+    return wantedSize;
+}
