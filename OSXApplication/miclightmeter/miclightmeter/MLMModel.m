@@ -118,7 +118,7 @@
 - (void) _updateLightModulation: (float)lightLevel at: (uint64_t)timestamp
 {
     mlm_feedmodulation(modulationMeter, lightLevel);
-    NSLog(@"lightLevel %f", lightLevel);
+//    NSLog(@"lightLevel %f", lightLevel);
     if (mlm_ready(modulationMeter)) {
         float min = 44100.0 / mlm_max(modulationMeter);
         float max = 44100.0 / mlm_min(modulationMeter);
