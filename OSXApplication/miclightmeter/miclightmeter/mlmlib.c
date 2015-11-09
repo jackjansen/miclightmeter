@@ -21,6 +21,8 @@ mlm_new()
         _MLM_LOCK_ALLOC;
         mlm->mlm_stretches = NULL;
         mlm->mlm_stretches_size = 0;
+        mlm->mlm_stretches_in = 0;
+        mlm->mlm_stretches_out = 0;
         mlm_reset(mlm);
     }
     return mlm;
@@ -94,6 +96,9 @@ static void _mlm_feedsample(struct mlm *mlm, double sample, long duration)
                         mlm->mlm_stretches = realloc(mlm->mlm_stretches, mlm->mlm_stretches_size*sizeof(*mlm->mlm_stretches));
                         assert(mlm->mlm_stretches);
                     }
+                    assert(mlm->mlm_stretches_in >= 0);
+                    assert(mlm->mlm_stretches_out <= mlm->mlm_stretches_in);
+                    assert(mlm->mlm_stretches_in < mlm->mlm_stretches_size);
                     mlm->mlm_stretches[mlm->mlm_stretches_in++] = nsample;
                 }
             }
@@ -213,6 +218,8 @@ double mlm_consume(struct mlm *mlm) {
     _MLM_LOCK_ENTER;
     if (mlm->mlm_stretches && mlm->mlm_stretches_in > mlm->mlm_stretches_out) {
         // Consume value from the out pointer
+        assert(mlm->mlm_stretches_out >= 0);
+        assert(mlm->mlm_stretches_out < mlm->mlm_stretches_size);
         rv = mlm->mlm_stretches[mlm->mlm_stretches_out++];
         // If the out pointer has caught up with the in pointer reset both
         if (mlm->mlm_stretches_out >= mlm->mlm_stretches_in) {
