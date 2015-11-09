@@ -47,7 +47,7 @@ void mlm_reset(struct mlm *mlm)
     mlm->mlm_sumabsdeltas = 0;
     mlm->mlm_nsamples = 0;
     mlm->mlm_last_to_positive = 0;
-    mlm->mlm_initializing = 1;
+    mlm->mlm_initializing = 2;
     mlm->mlm_minstretch = -1;
     mlm->mlm_maxstretch = -1;
     mlm->mlm_allstretch = 0;
@@ -102,7 +102,7 @@ static void _mlm_feedsample(struct mlm *mlm, double sample, long duration)
                     mlm->mlm_stretches[mlm->mlm_stretches_in++] = nsample;
                 }
             }
-            mlm->mlm_initializing = 0;
+            if (mlm->mlm_initializing > 0) mlm->mlm_initializing--;
         }
         mlm->mlm_curpolarity = curpolarity;
     }
