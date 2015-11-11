@@ -12,6 +12,32 @@
 #include <assert.h>
 #include <stdint.h>
 #include <limits.h>
+#ifdef __APPLE__
+#include <machine/endian.h>
+#include <libkern/OSByteOrder.h>
+
+#define htobe16(x) OSSwapHostToBigInt16(x)
+#define htole16(x) OSSwapHostToLittleInt16(x)
+#define be16toh(x) OSSwapBigToHostInt16(x)
+#define le16toh(x) OSSwapLittleToHostInt16(x)
+
+#define htobe32(x) OSSwapHostToBigInt32(x)
+#define htole32(x) OSSwapHostToLittleInt32(x)
+#define be32toh(x) OSSwapBigToHostInt32(x)
+#define le32toh(x) OSSwapLittleToHostInt32(x)
+
+#define htobe64(x) OSSwapHostToBigInt64(x)
+#define htole64(x) OSSwapHostToLittleInt64(x)
+#define be64toh(x) OSSwapBigToHostInt64(x)
+#define le64toh(x) OSSwapLittleToHostInt64(x)
+
+#define __BIG_ENDIAN    BIG_ENDIAN
+#define __LITTLE_ENDIAN LITTLE_ENDIAN
+#define __BYTE_ORDER    BYTE_ORDER
+#else
+#include <byteswap.h>
+#include <endian.h>
+#endif
 
 struct mlm*
 mlm_new()
@@ -235,20 +261,35 @@ int mlm_generate(short *buffer, int bufferSize, float minLevel, float maxLevel, 
 {
     // WAV header type
     struct WAVHeader {
-        int dummy; // xxxjack nonsense....
+        uint32_t chunkID;
+        uint32_t chunkSize;
+        uint32_t format;
+        uint32_t fmtChunkID;
+        uint32_t fmtChunkSize;
+        uint16_t sampleFormat;
+        uint16_t numChannels;
+        uint32_t sampleRate;
+        uint32_t byteRate;
+        uint16_t alignment;
+        uint16_t bitsPerSample;
+        uint32_t dataChunkID;
+        uint32_t dataChunkSize;
+        
     } *wavHeader;
     
     // First compute datasize needed
     int wantedSize = 0;
+    int dataSize;
     int nSample = 0;
     if (wantWAVHeader) wantedSize += sizeof(struct WAVHeader);
     if (sweepFreq > 0 && minLevel != maxLevel) {
-        nSample = 44100 / sweepFreq;
+        nSample = 44100; // / sweepFreq;
     } else {
-        assert(minLevel == maxLevel);
-        nSample = 100;
+        //assert(minLevel == maxLevel);
+        nSample = 44100; // 100;
     }
-    wantedSize += 2*sizeof(short)*nSample;
+    dataSize = 2*sizeof(short)*nSample;
+    wantedSize += dataSize;
     
     if (buffer == NULL || bufferSize == 0) {
         return wantedSize;
@@ -259,15 +300,27 @@ int mlm_generate(short *buffer, int bufferSize, float minLevel, float maxLevel, 
     if (wantWAVHeader) {
         wavHeader = (struct WAVHeader *)buffer;
         buffer += (sizeof(struct WAVHeader)/sizeof(short));
-        wavHeader->dummy = 42; // xxxjack nonsense....
+        wavHeader->chunkID = htobe32('RIFF');    // NOTE: multi-char constant
+        wavHeader->chunkSize = htole32(wantedSize-8);
+        wavHeader->format = htobe32('WAVE');     // NOTE: multi-char constant
+        wavHeader->fmtChunkID = htobe32('fmt '); // NOTE: multi-char constant
+        wavHeader->fmtChunkSize = htole32(16);
+        wavHeader->sampleFormat = htole16(1);
+        wavHeader->numChannels = htole16(2);
+        wavHeader->sampleRate = htole32(44100);
+        wavHeader->byteRate = htole32(44100*2*sizeof(short));
+        wavHeader->alignment = htole16(2*sizeof(short));
+        wavHeader->bitsPerSample = htole16(sizeof(short)*8);
+        wavHeader->dataChunkID = htobe32('data'); // NOTE: multi-char constant
+        wavHeader->dataChunkSize = htole32(dataSize);
     }
     // Fill samples
     float curOutputLevel = 0;
     int curSample;
-    short curLeft = 0x7fff;
+    short curLeft = 0x3fff;
     for (curSample = 0; curSample < nSample; curSample++) {
         float curWantedOutputLevel = minLevel + ((float)curSample/(float)nSample) * (maxLevel-minLevel);
-        if (curOutputLevel < curWantedOutputLevel) {
+        if (curOutputLevel <= curWantedOutputLevel) {
             // We should turn on the light. Output different L/R signals
             *buffer++ = curLeft;
             *buffer++ = -curLeft;
@@ -279,7 +332,8 @@ int mlm_generate(short *buffer, int bufferSize, float minLevel, float maxLevel, 
         // Invert output sameple for the next round
         curLeft = -curLeft;
         // Increase
-        curOutputLevel += 0.42; // xxxjack nonsense....
+        curOutputLevel += curWantedOutputLevel+0.001;
+        while (curOutputLevel > 1.0) curOutputLevel -= 1.0;
     }
     return wantedSize;
 }
