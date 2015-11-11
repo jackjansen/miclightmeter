@@ -283,10 +283,10 @@ int mlm_generate(short *buffer, int bufferSize, float minLevel, float maxLevel, 
     int nSample = 0;
     if (wantWAVHeader) wantedSize += sizeof(struct WAVHeader);
     if (sweepFreq > 0 && minLevel != maxLevel) {
-        nSample = 44100; // / sweepFreq;
+        nSample = 8000; // / sweepFreq;
     } else {
         //assert(minLevel == maxLevel);
-        nSample = 44100; // 100;
+        nSample = 8000; // 100;
     }
     dataSize = 2*sizeof(short)*nSample;
     wantedSize += dataSize;
@@ -307,8 +307,8 @@ int mlm_generate(short *buffer, int bufferSize, float minLevel, float maxLevel, 
         wavHeader->fmtChunkSize = htole32(16);
         wavHeader->sampleFormat = htole16(1);
         wavHeader->numChannels = htole16(2);
-        wavHeader->sampleRate = htole32(44100);
-        wavHeader->byteRate = htole32(44100*2*sizeof(short));
+        wavHeader->sampleRate = htole32(8000);
+        wavHeader->byteRate = htole32(8000*2*sizeof(short));
         wavHeader->alignment = htole16(2*sizeof(short));
         wavHeader->bitsPerSample = htole16(sizeof(short)*8);
         wavHeader->dataChunkID = htobe32('data'); // NOTE: multi-char constant
@@ -322,17 +322,17 @@ int mlm_generate(short *buffer, int bufferSize, float minLevel, float maxLevel, 
         float curWantedOutputLevel = minLevel + ((float)curSample/(float)nSample) * (maxLevel-minLevel);
         if (curOutputLevel <= curWantedOutputLevel) {
             // We should turn on the light. Output different L/R signals
-            *buffer++ = curLeft;
-            *buffer++ = -curLeft;
+            *buffer++ = htole16(curLeft);
+            *buffer++ = htole16(-curLeft);
         } else {
             // We are over our level already, turn off the lighe, output same L/R signals
-            *buffer++ = curLeft;
-            *buffer++ = curLeft;
+            *buffer++ = htole16(curLeft);
+            *buffer++ = htole16(curLeft);
         }
-        // Invert output sameple for the next round
+        // Invert output sample for the next round
         curLeft = -curLeft;
         // Increase
-        curOutputLevel += curWantedOutputLevel+0.001;
+        curOutputLevel += curWantedOutputLevel;
         while (curOutputLevel > 1.0) curOutputLevel -= 1.0;
     }
     return wantedSize;
