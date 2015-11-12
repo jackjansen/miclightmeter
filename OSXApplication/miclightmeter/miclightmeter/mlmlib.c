@@ -7,6 +7,7 @@
 //
 
 #include "mlmlib.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <assert.h>
@@ -277,16 +278,21 @@ int mlm_generate(short *buffer, int bufferSize, float minLevel, float maxLevel, 
         
     } *wavHeader;
     
+    // Parameters
+    int sampleFreq = 8000;
+    int halfPeriodLength = 10;
+    int periodLength = 2*halfPeriodLength;
+
     // First compute datasize needed
     int wantedSize = 0;
     int dataSize;
     int nSample = 0;
     if (wantWAVHeader) wantedSize += sizeof(struct WAVHeader);
     if (sweepFreq > 0 && minLevel != maxLevel) {
-        nSample = 8000; // / sweepFreq;
+        nSample = periodLength * (sampleFreq / sweepFreq);
     } else {
         //assert(minLevel == maxLevel);
-        nSample = 8000; // 100;
+        nSample = sampleFreq;
     }
     dataSize = 2*sizeof(short)*nSample;
     wantedSize += dataSize;
@@ -307,8 +313,8 @@ int mlm_generate(short *buffer, int bufferSize, float minLevel, float maxLevel, 
         wavHeader->fmtChunkSize = htole32(16);
         wavHeader->sampleFormat = htole16(1);
         wavHeader->numChannels = htole16(2);
-        wavHeader->sampleRate = htole32(8000);
-        wavHeader->byteRate = htole32(8000*2*sizeof(short));
+        wavHeader->sampleRate = htole32(sampleFreq);
+        wavHeader->byteRate = htole32(sampleFreq*2*sizeof(short));
         wavHeader->alignment = htole16(2*sizeof(short));
         wavHeader->bitsPerSample = htole16(sizeof(short)*8);
         wavHeader->dataChunkID = htobe32('data'); // NOTE: multi-char constant
@@ -320,20 +326,24 @@ int mlm_generate(short *buffer, int bufferSize, float minLevel, float maxLevel, 
     short curLeft = 0x3fff;
     for (curSample = 0; curSample < nSample; curSample++) {
         float curWantedOutputLevel = minLevel + ((float)curSample/(float)nSample) * (maxLevel-minLevel);
-        if (curOutputLevel <= curWantedOutputLevel) {
+        if (curOutputLevel < curWantedOutputLevel) {
             // We should turn on the light. Output different L/R signals
             *buffer++ = htole16(curLeft);
             *buffer++ = htole16(-curLeft);
+            fprintf(stderr, "%d %d\n", curLeft, -curLeft);
         } else {
             // We are over our level already, turn off the lighe, output same L/R signals
             *buffer++ = htole16(curLeft);
             *buffer++ = htole16(curLeft);
+            fprintf(stderr, "%d %d\n", curLeft, curLeft);
         }
         // Invert output sample for the next round
-        curLeft = -curLeft;
-        // Increase
-        curOutputLevel += curWantedOutputLevel;
-        while (curOutputLevel > 1.0) curOutputLevel -= 1.0;
+        if (curSample % halfPeriodLength == 0) {
+            curLeft = -curLeft;
+            curOutputLevel = 0;
+        } else {
+            curOutputLevel += (1.0 / halfPeriodLength);
+        }
     }
     return wantedSize;
 }
