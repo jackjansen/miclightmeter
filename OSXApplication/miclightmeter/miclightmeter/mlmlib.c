@@ -323,19 +323,19 @@ int mlm_generate(short *buffer, int bufferSize, float minLevel, float maxLevel, 
     // Fill samples
     float curOutputLevel = 0;
     int curSample;
-    short curLeft = 0x3fff;
+    short curLeft = 0x3ff;
     for (curSample = 0; curSample < nSample; curSample++) {
         float curWantedOutputLevel = minLevel + ((float)curSample/(float)nSample) * (maxLevel-minLevel);
         if (curOutputLevel < curWantedOutputLevel) {
             // We should turn on the light. Output different L/R signals
             *buffer++ = htole16(curLeft);
-            *buffer++ = htole16(-curLeft);
-            fprintf(stderr, "%d %d\n", curLeft, -curLeft);
+            *buffer++ = htole16(0);
+            fprintf(stderr, "%d %d\n", curLeft, 0);
         } else {
             // We are over our level already, turn off the lighe, output same L/R signals
-            *buffer++ = htole16(curLeft);
-            *buffer++ = htole16(curLeft);
-            fprintf(stderr, "%d %d\n", curLeft, curLeft);
+            *buffer++ = htole16(0);
+            *buffer++ = htole16(0);
+            fprintf(stderr, "%d %d\n", 0, 0);
         }
         // Invert output sample for the next round
         if (curSample % halfPeriodLength == 0) {
