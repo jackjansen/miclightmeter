@@ -282,19 +282,24 @@ int mlm_generate(short *buffer, int bufferSize, float minLevel, float maxLevel, 
     int sampleFreq = 8000;
     int halfPeriodLength = 10;
     int periodLength = 2*halfPeriodLength;
+    int sweepLength = 0;
+    int nPeriod = 1;
 
     // First compute datasize needed
     int wantedSize = 0;
     int dataSize;
-    int nSample = 0;
+    int nSamplePerPeriod = 0;
     if (wantWAVHeader) wantedSize += sizeof(struct WAVHeader);
     if (sweepFreq > 0 && minLevel != maxLevel) {
-        nSample = periodLength * (sampleFreq / sweepFreq);
+        sweepLength = sampleFreq / sweepFreq;
+        nSamplePerPeriod = periodLength * sweepLength;
     } else {
         //assert(minLevel == maxLevel);
-        nSample = sampleFreq;
+        nSamplePerPeriod = periodLength;
     }
-    dataSize = 2*sizeof(short)*nSample;
+    // Now extend so we have at least one second of data
+    while (nPeriod*nSamplePerPeriod < sampleFreq) nPeriod++;
+    dataSize = 2*sizeof(short)*nPeriod*nSamplePerPeriod;
     wantedSize += dataSize;
     
     if (buffer == NULL || bufferSize == 0) {
@@ -324,18 +329,19 @@ int mlm_generate(short *buffer, int bufferSize, float minLevel, float maxLevel, 
     float curOutputLevel = 0;
     int curSample;
     short curLeft = 0x3ff;
-    for (curSample = 0; curSample < nSample; curSample++) {
-        float curWantedOutputLevel = minLevel + ((float)curSample/(float)nSample) * (maxLevel-minLevel);
+    for (curSample = 0; curSample < nSamplePerPeriod*nPeriod; curSample++) {
+        float curWantedOutputLevel = minLevel;
+        if (sweepLength) curWantedOutputLevel += ((float)(curSample % sweepLength)/(float)sweepLength) * (maxLevel-minLevel);
         if (curOutputLevel < curWantedOutputLevel) {
             // We should turn on the light. Output different L/R signals
             *buffer++ = htole16(curLeft);
             *buffer++ = htole16(0);
-            fprintf(stderr, "%d %d\n", curLeft, 0);
+//            fprintf(stderr, "%d %d\n", curLeft, 0);
         } else {
             // We are over our level already, turn off the lighe, output same L/R signals
             *buffer++ = htole16(0);
             *buffer++ = htole16(0);
-            fprintf(stderr, "%d %d\n", 0, 0);
+//            fprintf(stderr, "%d %d\n", 0, 0);
         }
         // Invert output sample for the next round
         if (curSample % halfPeriodLength == 0) {
