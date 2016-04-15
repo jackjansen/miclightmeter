@@ -23,6 +23,7 @@
         deviceName = nil;
         outputCapturer = nil;
         session = nil;
+        recorder = nil;
         sampleBufferQueue = dispatch_queue_create("Audio Sample Queue", DISPATCH_QUEUE_SERIAL);
         [self _initDevice];
     }
@@ -138,6 +139,41 @@
     }
     if (bufferOut) CFRelease(bufferOut);
     if (bufferList) free(bufferList);
+}
+
+- (IBAction) toggleRecording: (id) sender
+{
+    if (recorder) {
+        NSLog(@"Stop recording");
+        [recorder stopRecording];
+        [session removeOutput: recorder];
+        recorder = nil;
+    } else {
+        NSLog(@"Start recording %@", [AVCaptureAudioFileOutput availableOutputFileTypes]);
+        NSSavePanel *panel = [NSSavePanel savePanel];
+        panel.allowedFileTypes = [AVCaptureAudioFileOutput availableOutputFileTypes];
+        BOOL ok = [panel runModal];
+        if (ok) {
+            NSLog(@"Recording to %@", panel.URL);
+            [[NSFileManager defaultManager] removeItemAtURL: panel.URL error:nil];
+            recorder = [[AVCaptureAudioFileOutput alloc] init];
+            [session addOutput: recorder];
+            CFStringRef ext =(__bridge CFStringRef)([panel.URL pathExtension]);
+            NSString *uti = CFBridgingRelease(UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, ext, NULL));
+            [recorder startRecordingToOutputFileURL:panel.URL outputFileType:uti recordingDelegate:self];
+        } else {
+            NSButton *b = sender;
+            b.state = NSOffState;
+        }
+    }
+}
+
+- (void)captureOutput:(AVCaptureFileOutput *)captureOutput
+                didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
+                fromConnections:(NSArray *)connections
+                error:(NSError *)error
+{
+    NSLog(@"capture audio finished, error=%@", error);
 }
 
 @end

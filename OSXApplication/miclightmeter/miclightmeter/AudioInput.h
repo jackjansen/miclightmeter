@@ -25,12 +25,13 @@
 
 @end
 
-@interface AudioInput : NSObject <AVCaptureAudioDataOutputSampleBufferDelegate> {
+@interface AudioInput : NSObject <AVCaptureAudioDataOutputSampleBufferDelegate, AVCaptureFileOutputRecordingDelegate> {
     AVCaptureAudioDataOutput *outputCapturer;
     AVCaptureSession *session;
     dispatch_queue_t sampleBufferQueue;
     NSString *deviceID;
     NSString *deviceName;
+    AVCaptureAudioFileOutput *recorder;
 }
 
 @property (readonly) NSString *deviceID;
@@ -40,5 +41,6 @@
 - (void) _initDevice;
 - (void) startCapturing;
 - (void) stopCapturing;
+- (IBAction) toggleRecording: (id) sender;
 
 @end
