@@ -34,7 +34,8 @@ def init_mlmlib():
         _mlmlib.mlm_current.restype = ctypes.c_double
         _mlmlib.mlm_consume.argtypes = [ctypes.c_void_p]
         _mlmlib.mlm_consume.restype = ctypes.c_double
-        
+        _mlmlib.mlm_generate.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_float, ctypes.c_float, ctypes.c_float, ctypes.c_int]
+        _mlmlib.mlm_generate.restype = ctypes.c_int
 
 class Error(RuntimeError):
     pass
@@ -81,6 +82,15 @@ class mlm:
     def current(self): return _mlmlib.mlm_current(self._mlm)
     def consume(self): return _mlmlib.mlm_consume(self._mlm)
     
+def generate(minLevel, maxLevel, sweepFreq, wantHeader):
+    init_mlmlib()
+    bufSize = _mlmlib.mlm_generate(None, 0, minLevel, maxLevel, sweepFreq, wantHeader)
+    print 'bufSize=', bufSize
+    buffer = ctypes.create_string_buffer(bufSize)
+    bs2 = _mlmlib.mlm_generate(buffer, bufSize, minLevel, maxLevel, sweepFreq, wantHeader)
+    assert bs2 == bufSize
+    return buffer.raw
+        
 def _test():
     m = mlm()
     print 'mlm address is %x' % m._mlm
@@ -99,6 +109,10 @@ def _test():
         if c < 0: break
     print
     del m
+    data2 = generate(0.5, 0.5, 0, 1)
+    print 'generate (steady half light, header) returned %d bytes' % (len(data2))
+    data4 = generate(0, 1, 4, 0)
+    print 'generate (sweep of 4 Hz, no header) returned %d bytes' % (len(data4))
     print 'all done'
     
 if __name__ == '__main__':

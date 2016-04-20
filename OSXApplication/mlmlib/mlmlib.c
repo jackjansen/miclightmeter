@@ -279,8 +279,8 @@ int mlm_generate(short *buffer, int bufferSize, float minLevel, float maxLevel, 
     
     // Parameters
     int sampleFreq = 8000;
-    int halfPeriodLength = 10;
-    int periodLength = 2*halfPeriodLength;
+    int halfPeriodLength = 10;              // 1.25 ms
+    int periodLength = 2*halfPeriodLength;  // 2.5 ms
     int sweepLength = 0;
     int nPeriod = 1;
 
