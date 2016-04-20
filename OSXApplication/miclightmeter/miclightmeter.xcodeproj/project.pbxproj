@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0404B9761BE2B2290028416A /* AudioInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404B9751BE2B2290028416A /* AudioInput.m */; };
-		041BB1BE1BE50C5600BB75BA /* mlmlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 041BB1BD1BE50C5600BB75BA /* mlmlib.c */; };
 		045394F11BE174B7005B84E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 045394F01BE174B7005B84E2 /* AppDelegate.m */; };
 		045394F41BE174B7005B84E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 045394F31BE174B7005B84E2 /* main.m */; };
 		045394F61BE174B7005B84E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 045394F51BE174B7005B84E2 /* Assets.xcassets */; };
@@ -18,6 +17,7 @@
 		0453951E1BE18495005B84E2 /* MLMValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0453951D1BE18495005B84E2 /* MLMValue.m */; };
 		045395211BE185AB005B84E2 /* MLMModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 045395201BE185AB005B84E2 /* MLMModel.m */; };
 		04CB22C81BF14C3500954396 /* AudioGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CB22C71BF14C3500954396 /* AudioGenerator.m */; };
+		04D004951CC7DADA00028096 /* libmlmlib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D004941CC7DADA00028096 /* libmlmlib.dylib */; };
 		04FEC12A1BE8054400C12D0D /* MLM3ColorLevelIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC1291BE8054400C12D0D /* MLM3ColorLevelIndicator.m */; };
 		04FEC12D1BE8058700C12D0D /* MLM3ColorLevelIndicatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC12C1BE8058700C12D0D /* MLM3ColorLevelIndicatorCell.m */; };
 		04FEC1301BE81A0600C12D0D /* MLMRangeLevelIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC12F1BE81A0600C12D0D /* MLMRangeLevelIndicator.m */; };
@@ -44,8 +44,6 @@
 /* Begin PBXFileReference section */
 		0404B9741BE2B2290028416A /* AudioInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioInput.h; sourceTree = "<group>"; };
 		0404B9751BE2B2290028416A /* AudioInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioInput.m; sourceTree = "<group>"; };
-		041BB1BC1BE50B1400BB75BA /* mlmlib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mlmlib.h; sourceTree = "<group>"; };
-		041BB1BD1BE50C5600BB75BA /* mlmlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mlmlib.c; sourceTree = "<group>"; };
 		045394EC1BE174B7005B84E2 /* miclightmeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miclightmeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045394EF1BE174B7005B84E2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		045394F01BE174B7005B84E2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -65,6 +63,7 @@
 		045395201BE185AB005B84E2 /* MLMModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMModel.m; sourceTree = "<group>"; };
 		04CB22C61BF14C3500954396 /* AudioGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioGenerator.h; sourceTree = "<group>"; };
 		04CB22C71BF14C3500954396 /* AudioGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioGenerator.m; sourceTree = "<group>"; };
+		04D004941CC7DADA00028096 /* libmlmlib.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmlmlib.dylib; path = "../../../../Library/Developer/Xcode/DerivedData/miclightmeter-dblyefahjontjgghdfvtaqjeuatm/Build/Products/Debug/libmlmlib.dylib"; sourceTree = "<group>"; };
 		04FEC1281BE8054400C12D0D /* MLM3ColorLevelIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLM3ColorLevelIndicator.h; sourceTree = "<group>"; };
 		04FEC1291BE8054400C12D0D /* MLM3ColorLevelIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLM3ColorLevelIndicator.m; sourceTree = "<group>"; };
 		04FEC12B1BE8058700C12D0D /* MLM3ColorLevelIndicatorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLM3ColorLevelIndicatorCell.h; sourceTree = "<group>"; };
@@ -80,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04D004951CC7DADA00028096 /* libmlmlib.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +103,7 @@
 		045394E31BE174B7005B84E2 = {
 			isa = PBXGroup;
 			children = (
+				04D004941CC7DADA00028096 /* libmlmlib.dylib */,
 				045394EE1BE174B7005B84E2 /* miclightmeter */,
 				045395021BE174B8005B84E2 /* miclightmeterTests */,
 				0453950D1BE174B8005B84E2 /* miclightmeterUITests */,
@@ -137,8 +138,6 @@
 				04CB22C71BF14C3500954396 /* AudioGenerator.m */,
 				0404B9741BE2B2290028416A /* AudioInput.h */,
 				0404B9751BE2B2290028416A /* AudioInput.m */,
-				041BB1BC1BE50B1400BB75BA /* mlmlib.h */,
-				041BB1BD1BE50C5600BB75BA /* mlmlib.c */,
 				04FEC1281BE8054400C12D0D /* MLM3ColorLevelIndicator.h */,
 				04FEC1291BE8054400C12D0D /* MLM3ColorLevelIndicator.m */,
 				04FEC12B1BE8058700C12D0D /* MLM3ColorLevelIndicatorCell.h */,
@@ -307,7 +306,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				04CB22C81BF14C3500954396 /* AudioGenerator.m in Sources */,
-				041BB1BE1BE50C5600BB75BA /* mlmlib.c in Sources */,
 				04FEC12A1BE8054400C12D0D /* MLM3ColorLevelIndicator.m in Sources */,
 				04FEC1301BE81A0600C12D0D /* MLMRangeLevelIndicator.m in Sources */,
 				045395211BE185AB005B84E2 /* MLMModel.m in Sources */,
@@ -399,6 +397,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../mlmlib";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -436,6 +435,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../mlmlib";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
