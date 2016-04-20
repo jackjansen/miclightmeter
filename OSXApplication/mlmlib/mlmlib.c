@@ -84,7 +84,6 @@ void mlm_reset(struct mlm *mlm)
 
 static void _mlm_feedsample(struct mlm *mlm, double sample, long duration)
 {
-    
     // Update sums, for computing average and amplitude
     mlm->mlm_nsamples += duration;
     mlm->mlm_sumsamples += sample*duration;
@@ -336,12 +335,10 @@ int mlm_generate(short *buffer, int bufferSize, float minLevel, float maxLevel, 
             // We should turn on the light. Output different L/R signals
             *buffer++ = htole16(curLeft);
             *buffer++ = htole16(0);
-//            fprintf(stderr, "%d %d\n", curLeft, 0);
         } else {
             // We are over our level already, turn off the lighe, output same L/R signals
             *buffer++ = htole16(0);
             *buffer++ = htole16(0);
-//            fprintf(stderr, "%d %d\n", 0, 0);
         }
         // Invert output sample for the next round
         if (curSample % halfPeriodLength == 0) {

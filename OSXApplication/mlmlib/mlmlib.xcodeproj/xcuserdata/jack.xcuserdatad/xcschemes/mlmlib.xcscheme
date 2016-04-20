@@ -42,6 +42,10 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <PathRunnable
+         runnableDebuggingMode = "0"
+         FilePath = "/Users/jack/src/miclightmeter/OSXApplication/pymlmlib/python">
+      </PathRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
@@ -52,6 +56,11 @@
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
+         <AdditionalOption
+            key = "DYLD_PRINT_LIBRARIES"
+            value = ""
+            isEnabled = "YES">
+         </AdditionalOption>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
