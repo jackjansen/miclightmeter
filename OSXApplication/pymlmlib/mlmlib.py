@@ -53,18 +53,22 @@ class mlm:
     def reset(self):
         _mlmlib.mlm_reset(self._mlm)
         
-    def feed(self, data, channels):
+    def feedint(self, data, bytespersample, channels):
         if not data: return
-        tp = type(data[0])
-        for i in data:
-            if type(i) != tp:
-                raise Error, 'feed() data must all by same type'
-        if tp == type(1.1):
-            dataType = ctypes.c_float*len(data)
-            _mlmlib.mlm_feedfloat(self._mlm, dataType(*tuple(data)), ctypes.c_int(len(data)), ctypes.c_int(channels))
-        elif tp == type(1):
+        if bytespersample == 1:
+            dataType = ctypes.c_int8*len(data)
+        elif bytespersample == 2:
             dataType = ctypes.c_int16*len(data)
-            _mlmlib.mlm_feedint(self._mlm, dataType(*tuple(data)), ctypes.c_int(2*len(data)), ctypes.c_int(2), ctypes.c_int(channels))
+        elif bytespersample == 4:
+            dataType = ctypes.c_int32*len(data)
+        else:
+            raise Error, "Unsupported bytespersample %d" % bytespersample
+        _mlmlib.mlm_feedint(self._mlm, dataType(*tuple(data)), ctypes.c_int(bytespersample*len(data)), ctypes.c_int(bytespersample), ctypes.c_int(channels))
+            
+    def feedfloat(self, data, channels):
+        if not data: return
+        dataType = ctypes.c_float*len(data)
+        _mlmlib.mlm_feedfloat(self._mlm, dataType(*tuple(data)), ctypes.c_int(len(data)), ctypes.c_int(channels))
             
     def feedModulation(self, duration):
         _mlmlib.mlm_feedmodulation(self._mlm, ctypes.c_float(duration))
@@ -79,15 +83,21 @@ class mlm:
     
 def _test():
     m = mlm()
-    print 'mlm address is %x' % m._mlm, m._mlm
-    m.feed([0, 100, 0, -100, 0], 1)
-    m.feed([0.0, 200.0, 0.0, -50.0, 0.0], 1)
+    print 'mlm address is %x' % m._mlm
+    m.feedint([0, 255, 0, -255, 0, 255, 0, -255,0, 255, 0, -255,0, 255, 0, -255,0], 2, 1)
+    m.feedint([0, 16777216, 0, -16777216, 0, 16777216, 0, -16777216,0, 16777216, 0, -16777216,0, 16777216, 0, -16777216,0], 4, 1)
+    m.feedfloat([0.0, 0.004, 0.0, -0.004,0.0, 0.004, 0.0, -0.004, 0.0, 0.004, 0.0, -0.004, 0.0, 0.004, 0.0, -0.004,  0.0], 1)
     print 'ready', m.ready()
     print 'amplitude', m.amplitude()
     print 'min', m.min()
     print 'max', m.max()
     print 'average', m.average()
-    print 'consume', m.consume()
+    print 'consume',
+    while True:
+        c = m.consume()
+        print c,
+        if c < 0: break
+    print
     del m
     print 'all done'
     
