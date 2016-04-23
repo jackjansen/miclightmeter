@@ -22,6 +22,7 @@ struct mlm {
     long mlm_nsamples;
     
     long mlm_last_to_positive;
+    long mlm_last_to_negative;
     int mlm_initializing;
     long mlm_minstretch;
     long mlm_maxstretch;

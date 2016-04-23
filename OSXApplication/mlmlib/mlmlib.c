@@ -74,6 +74,7 @@ void mlm_reset(struct mlm *mlm)
     mlm->mlm_sumabsdeltas = 0;
     mlm->mlm_nsamples = 0;
     mlm->mlm_last_to_positive = 0;
+    mlm->mlm_last_to_negative = 0;
     mlm->mlm_initializing = 2;
     mlm->mlm_minstretch = -1;
     mlm->mlm_maxstretch = -1;
@@ -98,15 +99,18 @@ static void _mlm_feedsample(struct mlm *mlm, double sample, long duration)
     double threshold = amplitude / 10;
     
     // Compute polarity as three-way value, taking average and threshold into account
-    int curpolarity = (delta < threshold ? -1 :
+    int curpolarity = (delta < -threshold ? -1 :
                        (delta > threshold ? 1 : 0));
     
     // Check whether we made a negative-to-positive or zero-to-positive transition
     if (curpolarity != mlm->mlm_curpolarity) {
+        if (curpolarity < 0) {
+            mlm->mlm_last_to_negative = 0;
+        }
         if (curpolarity > 0) {
             // We have made a zero-to-positive or negative-to-positive transition
             // Record duration of whole phase, if there was one
-            if (mlm->mlm_last_to_positive) {
+            if (mlm->mlm_last_to_positive && mlm->mlm_last_to_positive > mlm->mlm_last_to_negative) {
                 long nsample = mlm->mlm_last_to_positive;
                 mlm->mlm_last_to_positive = 0;
                 mlm->mlm_laststretch = nsample;
@@ -132,7 +136,10 @@ static void _mlm_feedsample(struct mlm *mlm, double sample, long duration)
         }
         mlm->mlm_curpolarity = curpolarity;
     }
-    if (!mlm->mlm_initializing) mlm->mlm_last_to_positive += duration;
+    if (!mlm->mlm_initializing) {
+        mlm->mlm_last_to_positive += duration;
+        mlm->mlm_last_to_negative += duration;
+    }
 }
 
 void mlm_feedfloat(struct mlm *mlm, float *data, int nsamples, int channels)
