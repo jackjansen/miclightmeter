@@ -189,6 +189,27 @@ void mlm_feedmodulation(struct mlm *mlm, double duration)
     _MLM_LOCK_LEAVE;
 }
 
+void mlm_ageminmax(struct mlm *mlm, float factor)
+{
+    if (mlm->mlm_initializing || mlm->mlm_minstretch < 0 || mlm->mlm_maxstretch < 0) return;
+    _MLM_LOCK_ENTER;
+    assert(factor >= 0);
+    assert(factor <= 1);
+    long newMin = mlm->mlm_minstretch + 0.5*factor*(mlm->mlm_maxstretch-mlm->mlm_minstretch) + 1;
+    long newMax = mlm->mlm_maxstretch - 0.5*factor*(mlm->mlm_maxstretch-mlm->mlm_minstretch) - 1;
+    if (newMin > newMax) {
+        newMin--;
+        newMax++;
+    }
+    assert(newMax >= newMin);
+    if (newMin > mlm->mlm_laststretch) newMin = mlm->mlm_laststretch;
+    if (newMax < mlm->mlm_laststretch) newMax = mlm->mlm_laststretch;
+    // Should we also go over all stretches not yet consumed?
+    mlm->mlm_minstretch = newMin;
+    mlm->mlm_maxstretch = newMax;
+    _MLM_LOCK_LEAVE;
+}
+
 double mlm_amplitude(struct mlm *mlm)
 {
     _MLM_LOCK_ENTER;

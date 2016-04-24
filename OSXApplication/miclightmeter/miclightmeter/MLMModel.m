@@ -56,6 +56,10 @@
     self.lightModulation.curValue = 0;
     self.lightModulation.valid = NO;
     
+    self.ageLightMeter = YES;
+    self.ageModulationMeter = YES;
+    
+    [NSThread detachNewThreadSelector:@selector(age:) toTarget:self withObject:nil];
 }
 
 - (IBAction)resetLightLevel:(id)sender
@@ -129,7 +133,16 @@
         self.lightModulation.curValue = cur;
         self.lightModulation.avgValue = avg;
         self.lightModulation.valid = YES;
-        //while(mlm_consume(modulationMeter) > 0);
+        while(mlm_consume(modulationMeter) > 0);
+    }
+}
+
+- (void) age: (id)dummy
+{
+    while(1) {
+        sleep(1);
+        if (self.ageLightMeter) mlm_ageminmax(lightMeter, 0.1);
+        if (self.ageModulationMeter) mlm_ageminmax(modulationMeter, 0.1);
     }
 }
 
@@ -139,4 +152,6 @@
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 //    NSLog(@"now mlmmodel observeValueForKeyPath:%@ ofObject:%@ change:%@ context:%p", keyPath, object, change, context);
 }
+         
+         
 @end
