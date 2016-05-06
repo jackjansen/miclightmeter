@@ -26,6 +26,8 @@ struct mlm {
     int mlm_initializing;
     long mlm_minstretch;
     long mlm_maxstretch;
+    double mlm_runningminstretch;
+    double mlm_runningmaxstretch;
     long mlm_laststretch;
     long mlm_allstretch;
     long mlm_nstretch;
@@ -43,12 +45,13 @@ void mlm_reset(struct mlm *mlm);
 void mlm_feedfloat(struct mlm *mlm, float *data, int nsamples, int channels);
 void mlm_feedint(struct mlm *mlm, void *data, int nbytes, int nbytepersample, int channels);
 void mlm_feedmodulation(struct mlm *mlm, double duration);
-void mlm_ageminmax(struct mlm *mlm, float factor);
 
 int mlm_ready(struct mlm *mlm);
 double mlm_amplitude(struct mlm *mlm);
 double mlm_min(struct mlm *mlm);
 double mlm_max(struct mlm *mlm);
+double mlm_runningmin(struct mlm *mlm);
+double mlm_runningmax(struct mlm *mlm);
 double mlm_average(struct mlm *mlm);
 double mlm_current(struct mlm *mlm);
 double mlm_consume(struct mlm *mlm);

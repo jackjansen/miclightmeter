@@ -14,9 +14,8 @@
 @property IBOutlet MLMValue* audioLevel;
 @property IBOutlet MLMValue* lightLevel;
 @property IBOutlet MLMValue* lightModulation;
+@property BOOL lightOn;
 @property IBOutlet AudioInput* capturer;
-@property BOOL ageLightMeter;
-@property BOOL ageModulationMeter;
 
 - (IBAction)resetLightLevel:(id)sender;
 - (IBAction)resetLightModulation:(id)sender;

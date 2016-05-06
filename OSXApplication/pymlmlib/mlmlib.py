@@ -30,6 +30,12 @@ def init_mlmlib():
         _mlmlib.mlm_max.restype = ctypes.c_double
         _mlmlib.mlm_average.argtypes = [ctypes.c_void_p]
         _mlmlib.mlm_average.restype = ctypes.c_double
+        _mlmlib.mlm_runningmin.argtypes = [ctypes.c_void_p]
+        _mlmlib.mlm_runningmin.restype = ctypes.c_double
+        _mlmlib.mlm_runningmax.argtypes = [ctypes.c_void_p]
+        _mlmlib.mlm_runningmax.restype = ctypes.c_double
+        _mlmlib.mlm_runningaverage.argtypes = [ctypes.c_void_p]
+        _mlmlib.mlm_runningaverage.restype = ctypes.c_double
         _mlmlib.mlm_current.argtypes = [ctypes.c_void_p]
         _mlmlib.mlm_current.restype = ctypes.c_double
         _mlmlib.mlm_consume.argtypes = [ctypes.c_void_p]
@@ -78,6 +84,9 @@ class mlm:
     def amplitude(self): return _mlmlib.mlm_amplitude(self._mlm)
     def min(self): return _mlmlib.mlm_min(self._mlm)
     def max(self): return _mlmlib.mlm_max(self._mlm)
+    def runningmin(self): return _mlmlib.mlm_runningmin(self._mlm)
+    def runningmax(self): return _mlmlib.mlm_runningmax(self._mlm)
+    def runningaverage(self): return _mlmlib.mlm_runningaverage(self._mlm)
     def average(self): return _mlmlib.mlm_average(self._mlm)
     def current(self): return _mlmlib.mlm_current(self._mlm)
     def consume(self): return _mlmlib.mlm_consume(self._mlm)

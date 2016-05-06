@@ -56,10 +56,6 @@
     self.lightModulation.curValue = 0;
     self.lightModulation.valid = NO;
     
-    self.ageLightMeter = YES;
-    self.ageModulationMeter = YES;
-    
-    [NSThread detachNewThreadSelector:@selector(age:) toTarget:self withObject:nil];
 }
 
 - (IBAction)resetLightLevel:(id)sender
@@ -103,8 +99,8 @@
     if (mlm_ready(lightMeter)) {
         // We measure periods (with a value of 1 being 1/samplefreq seconds), but we want
         // the scale to be increasing light levels to the right, so we invert.
-        float min = self.lightLevel.absMaxValue - mlm_max(lightMeter);
-        float max = self.lightLevel.absMaxValue - mlm_min(lightMeter);
+        float min = self.lightLevel.absMaxValue - mlm_runningmax(lightMeter);
+        float max = self.lightLevel.absMaxValue - mlm_runningmin(lightMeter);
         float cur = self.lightLevel.absMaxValue - mlm_current(lightMeter);
         float avg = self.lightLevel.absMaxValue - mlm_average(lightMeter);
         self.lightLevel.minValue = min;
@@ -112,6 +108,7 @@
         self.lightLevel.curValue = cur;
         self.lightLevel.avgValue = avg;
         self.lightLevel.valid = YES;
+        self.lightOn = cur >= (max+min)/2;
         // Update modulation
         while ((cur=mlm_consume(lightMeter)) > 0) {
             [self _updateLightModulation: cur at: timestamp];
@@ -134,15 +131,6 @@
         self.lightModulation.avgValue = avg;
         self.lightModulation.valid = YES;
         while(mlm_consume(modulationMeter) > 0);
-    }
-}
-
-- (void) age: (id)dummy
-{
-    while(1) {
-        sleep(1);
-        if (self.ageLightMeter) mlm_ageminmax(lightMeter, 0.1);
-        if (self.ageModulationMeter) mlm_ageminmax(modulationMeter, 0.1);
     }
 }
 

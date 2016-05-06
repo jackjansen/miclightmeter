@@ -4,6 +4,8 @@ import struct
 import sys
 
 PRINTDATA=False
+AGE_PERIOD=1.0
+AGE_FACTOR=0.1
 
 def int24_to_int(input_data):
     bytelen = len(input_data)
@@ -21,6 +23,7 @@ def main():
     nSample = 0
     sumPeriods = 0
     keepData = []
+    lastage = 0
     for i in range(0, w.getnframes()):
         rawData = w.readframes(1)
         if width == 2:
@@ -46,7 +49,10 @@ def main():
                 c = m.consume()
                 if c >= 0:
                     sumPeriods += c
-                    print float(sumPeriods)/w.getframerate(), '\t', c
+                    now = float(sumPeriods)/w.getframerate()
+                    if now > lastage + AGE_PERIOD:
+                        m.ageminmax(AGE_FACTOR)
+                    print now, '\t', c, '\t---\t', m.min(), m.max(), (c >= (m.min()+m.max())/2)
                 else:
                     break
 

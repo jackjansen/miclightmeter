@@ -40,6 +40,11 @@
 #include <endian.h>
 #endif
 
+// Values closer to zero than this are treated as zero
+#define ALMOST_ZERO 0.00001
+//
+#define DURATION_FOR_COMPLETE_AGE (400.0)
+
 struct mlm*
 mlm_new()
 {
@@ -78,6 +83,8 @@ void mlm_reset(struct mlm *mlm)
     mlm->mlm_initializing = 2;
     mlm->mlm_minstretch = -1;
     mlm->mlm_maxstretch = -1;
+    mlm->mlm_runningminstretch = -1;
+    mlm->mlm_runningmaxstretch = -1;
     mlm->mlm_allstretch = 0;
     mlm->mlm_nstretch = 0;
     _MLM_LOCK_LEAVE;
@@ -94,7 +101,7 @@ static void _mlm_feedsample(struct mlm *mlm, double sample, long duration)
     
     // Compute average and amplitude
     double amplitude = mlm->mlm_sumabsdeltas / mlm->mlm_nsamples;
-    if (amplitude > -0.00001 && amplitude < 0.00001) amplitude = 0;
+    if (amplitude > -ALMOST_ZERO && amplitude < ALMOST_ZERO) amplitude = 0;
     assert(amplitude >= 0);
     double threshold = amplitude / 10;
     
@@ -120,6 +127,8 @@ static void _mlm_feedsample(struct mlm *mlm, double sample, long duration)
                     mlm->mlm_nstretch++;
                     if (nsample < mlm->mlm_minstretch || mlm->mlm_minstretch < 0) mlm->mlm_minstretch = nsample;
                     if (nsample > mlm->mlm_maxstretch || mlm->mlm_maxstretch < 0) mlm->mlm_maxstretch = nsample;
+                    if (nsample < mlm->mlm_runningminstretch || mlm->mlm_runningminstretch < 0) mlm->mlm_runningminstretch = nsample;
+                    if (nsample > mlm->mlm_runningmaxstretch || mlm->mlm_runningmaxstretch < 0) mlm->mlm_runningmaxstretch = nsample;
                     // Record sample point. First make sure there is room.
                     if (mlm->mlm_stretches == NULL || mlm->mlm_stretches_in >= mlm->mlm_stretches_size) {
                         mlm->mlm_stretches_size += 16;
@@ -130,6 +139,11 @@ static void _mlm_feedsample(struct mlm *mlm, double sample, long duration)
                     assert(mlm->mlm_stretches_out <= mlm->mlm_stretches_in);
                     assert(mlm->mlm_stretches_in < mlm->mlm_stretches_size);
                     mlm->mlm_stretches[mlm->mlm_stretches_in++] = nsample;
+                    // Update/age running min/max stretches
+                    if (mlm->mlm_runningminstretch < nsample-1)
+                        mlm->mlm_runningminstretch += ((double)duration/DURATION_FOR_COMPLETE_AGE);
+                    if (mlm->mlm_runningmaxstretch > nsample+1)
+                        mlm->mlm_runningmaxstretch -= ((double)duration/DURATION_FOR_COMPLETE_AGE);
                 }
             }
             if (mlm->mlm_initializing > 0) mlm->mlm_initializing--;
@@ -189,27 +203,6 @@ void mlm_feedmodulation(struct mlm *mlm, double duration)
     _MLM_LOCK_LEAVE;
 }
 
-void mlm_ageminmax(struct mlm *mlm, float factor)
-{
-    if (mlm->mlm_initializing || mlm->mlm_minstretch < 0 || mlm->mlm_maxstretch < 0) return;
-    _MLM_LOCK_ENTER;
-    assert(factor >= 0);
-    assert(factor <= 1);
-    long newMin = mlm->mlm_minstretch + 0.5*factor*(mlm->mlm_maxstretch-mlm->mlm_minstretch) + 1;
-    long newMax = mlm->mlm_maxstretch - 0.5*factor*(mlm->mlm_maxstretch-mlm->mlm_minstretch) - 1;
-    if (newMin > newMax) {
-        newMin--;
-        newMax++;
-    }
-    assert(newMax >= newMin);
-    if (newMin > mlm->mlm_laststretch) newMin = mlm->mlm_laststretch;
-    if (newMax < mlm->mlm_laststretch) newMax = mlm->mlm_laststretch;
-    // Should we also go over all stretches not yet consumed?
-    mlm->mlm_minstretch = newMin;
-    mlm->mlm_maxstretch = newMax;
-    _MLM_LOCK_LEAVE;
-}
-
 double mlm_amplitude(struct mlm *mlm)
 {
     _MLM_LOCK_ENTER;
@@ -245,6 +238,7 @@ double mlm_max(struct mlm *mlm)
     return rv;
 }
 
+
 double mlm_average(struct mlm *mlm)
 {
     double rv = 0;
@@ -252,6 +246,31 @@ double mlm_average(struct mlm *mlm)
     if (mlm->mlm_nstretch > 0) {
         rv = (double)mlm->mlm_allstretch / mlm->mlm_nstretch;
     }
+    _MLM_LOCK_LEAVE;
+    return rv;
+}
+
+double mlm_runningmin(struct mlm *mlm)
+{
+    _MLM_LOCK_ENTER;
+    double rv = mlm->mlm_runningminstretch;
+    _MLM_LOCK_LEAVE;
+    return rv;
+}
+
+double mlm_runningmax(struct mlm *mlm)
+{
+    _MLM_LOCK_ENTER;
+    double rv = mlm->mlm_runningmaxstretch;
+    _MLM_LOCK_LEAVE;
+    return rv;
+}
+
+double mlm_runningaverage(struct mlm *mlm)
+{
+    double rv = 0;
+    _MLM_LOCK_ENTER;
+    rv = (mlm->mlm_runningmaxstretch+mlm->mlm_runningminstretch)/2;
     _MLM_LOCK_LEAVE;
     return rv;
 }
